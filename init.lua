@@ -350,9 +350,10 @@ require('lazy').setup({
     config = function()
       require('fzf-lua').setup { { 'fzf-native' }, fzf_colors = true }
 
-      local fzf_lua = require 'fzf-lua'
-      vim.keymap.set('n', '<leader><leader>', fzf_lua.files, { desc = '[ ] Search files' })
-      vim.keymap.set('n', '<leader><Left>', fzf_lua.buffers, { desc = '[←] Search buffers' })
+      local fzf = require 'fzf-lua'
+      vim.keymap.set('n', '<leader><leader>', fzf.files, { desc = '[ ] Search files' })
+      vim.keymap.set('n', '<leader><Left>', fzf.buffers, { desc = '[←] Search buffers' })
+      vim.keymap.set('n', 'z=', fzf.spell_suggest, { desc = 'Select suggested spelling' })
     end,
   },
 
@@ -451,40 +452,40 @@ require('lazy').setup({
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          local fzf_lua = require 'fzf-lua'
+          local fzf = require 'fzf-lua'
 
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', function()
-            fzf_lua.lsp_definitions { jump_to_single_result = true }
+            fzf.lsp_definitions { jump_to_single_result = true }
           end, '[G]oto [D]efinition')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', function()
-            fzf_lua.lsp_declarations { jump_to_single_result = true }
+            fzf.lsp_declarations { jump_to_single_result = true }
           end, '[G]oto [D]eclaration')
 
           -- Find references for the word under your cursor.
-          map('gr', fzf_lua.lsp_references, '[G]oto [R]eferences')
+          map('gr', fzf.lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', fzf_lua.lsp_implementations, '[G]oto [I]mplementation')
+          map('gI', fzf.lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', fzf_lua.lsp_typedefs, 'Type [D]efinition')
+          map('<leader>D', fzf.lsp_typedefs, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', fzf_lua.lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('<leader>ds', fzf.lsp_document_symbols, '[D]ocument [S]ymbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('<leader>ws', fzf_lua.lsp_live_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('<leader>ws', fzf.lsp_live_workspace_symbols, '[W]orkspace [S]ymbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
