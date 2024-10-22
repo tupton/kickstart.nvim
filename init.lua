@@ -213,17 +213,6 @@ vim.keymap.set('n', '<C-y>', '5<C-y>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
--- vim.api.nvim_create_autocmd('TextYankPost', {
---   desc = 'Highlight when yanking (copying) text',
---   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
---   callback = function()
---     vim.highlight.on_yank()
---   end,
--- })
 vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Jump to last cursor position',
   group = vim.api.nvim_create_augroup('last-cursor-position', { clear = true }),
@@ -234,6 +223,22 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Markdown formatting and wrapped line display',
+  group = vim.api.nvim_create_augroup('text-formatting', { clear = true }),
+  pattern = { 'markdown', 'ghmarkdown' },
+  callback = function()
+    vim.opt_local.textwidth = 0
+    vim.opt_local.wrap = true
+    vim.opt_local.wrapmargin = 0
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+    vim.opt_local.cpoptions:append 'n'
+    vim.opt_local.showbreak = '» '
+  end,
+})
+
+-- [[ User commands ]]
 vim.api.nvim_create_user_command('E', 'e<bang>', { bang = true, desc = 'Reload current buffer' })
 vim.api.nvim_create_user_command('W', 'w<bang>', { bang = true, desc = 'Write current buffer' })
 vim.api.nvim_create_user_command('Q', 'q<bang>', { bang = true, desc = 'Quit current buffer' })
