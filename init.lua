@@ -807,6 +807,34 @@ require('lazy').setup({
     },
   },
 
+  {
+    'folke/zen-mode.nvim',
+    ft = { 'markdown', 'ghmarkdown' },
+    event = 'VimEnter',
+    dependencies = { 'folke/twilight.nvim' },
+    opts = {
+      window = {
+        width = 0.85,
+      },
+    },
+    config = function()
+      require('twilight').setup {
+        dimming = {
+          alpha = 0.15,
+        },
+        context = 30,
+      }
+      vim.api.nvim_create_autocmd({ 'VimEnter', 'BufReadPost' }, {
+        desc = 'Zen mode for prose',
+        group = vim.api.nvim_create_augroup('zen-mode', { clear = true }),
+        pattern = { '*.md', '*.markdown', '*.txt' },
+        callback = function()
+          require('zen-mode').open { window = { width = 0.65 } }
+        end,
+      })
+    end,
+  },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
