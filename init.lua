@@ -224,6 +224,16 @@ vim.keymap.set('n', '<C-y>', '5<C-y>')
 --     vim.highlight.on_yank()
 --   end,
 -- })
+vim.api.nvim_create_autocmd('BufReadPost', {
+  desc = 'Jump to last cursor position',
+  group = vim.api.nvim_create_augroup('last-cursor-position', { clear = true }),
+  callback = function()
+    if vim.bo.filetype:sub(1, 3) ~= 'git' and vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
+      vim.cmd 'normal! g`"'
+    end
+  end,
+})
+
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
