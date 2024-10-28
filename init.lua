@@ -283,6 +283,7 @@ require('lazy').setup({
 
   --:Gdiff, :Gcommit, etc.
   'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
 
   -- Javascript syntax
   {
