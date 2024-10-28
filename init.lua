@@ -772,10 +772,22 @@ require('lazy').setup({
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.o.termguicolors = true
       vim.o.background = 'dark'
-      vim.cmd.colorscheme 'tokyonight-storm'
+      -- vim.cmd.colorscheme 'tokyonight-storm'
 
       -- You can configure highlights by doing something like:
       -- vim.cmd.hi 'Comment gui=none'
+    end,
+  },
+
+  {
+    'shaunsingh/nord.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    init = function()
+      vim.o.termguicolors = true
+      vim.o.background = 'dark'
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = true
+      vim.cmd.colorscheme 'nord'
     end,
   },
 
