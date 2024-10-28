@@ -220,7 +220,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Jump to last cursor position',
   group = vim.api.nvim_create_augroup('last-cursor-position', { clear = true }),
   callback = function()
-    if vim.bo.filetype:sub(1, 3) ~= 'git' and vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
+    if not vim.bo.filetype:sub(1, 3) == 'git' and vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
       vim.cmd 'normal! g`"'
     end
   end,
