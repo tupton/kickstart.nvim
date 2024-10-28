@@ -195,6 +195,9 @@ vim.opt.spelllang = 'en_us'
 vim.opt.diffopt:append { vertical = true, algorithm = 'histogram', ['indent-heuristic'] = true }
 vim.opt.fillchars:append { diff = ' ' }
 
+-- Show matching parens
+vim.opt.showmatch = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
