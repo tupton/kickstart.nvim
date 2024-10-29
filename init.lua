@@ -350,6 +350,8 @@ require('lazy').setup({
     event = 'VimEnter',
     config = function()
       require('fzf-lua').setup { { 'fzf-native' }, fzf_colors = true }
+      -- Use the fzf-lua UI for vim.ui.select
+      require('fzf-lua').register_ui_select()
 
       local fzf = require 'fzf-lua'
       vim.keymap.set('n', '<leader><leader>', fzf.files, { desc = '[ ] Search files' })
