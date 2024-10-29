@@ -281,21 +281,12 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  --:Gdiff, :Gcommit, etc.
+  -- :Gdiff, :Gcommit, etc.
   'tpope/vim-fugitive',
+  -- :GBrowse with Github
   'tpope/vim-rhubarb',
 
-  -- Javascript syntax
-  {
-    'othree/yajs.vim',
-    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-  },
-  {
-    'maxmellon/vim-jsx-pretty',
-    ft = { 'javascriptreact', 'typescriptreact' },
-  },
-
-  -- JSON syntax
+  -- JSON syntax, concealment
   {
     'elzr/vim-json',
     ft = 'json',
@@ -328,6 +319,7 @@ require('lazy').setup({
   -- Requires gitconfig changes to use as git mergetool
   'samoshkin/vim-mergetool',
 
+  -- Navigate between vim and tmux panes with the same keys
   {
     'christoomey/vim-tmux-navigator',
     cmd = {
@@ -587,8 +579,7 @@ require('lazy').setup({
         'eslint-lsp', -- Used to format js/ts
         'eslint_d', -- Used to format js/ts
         'prettierd', -- Used to format js/ts
-        'rustywind', -- Format tailwind classnames
-        'codespell',
+        'rustywind', -- Format tailwind class names
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -824,12 +815,12 @@ require('lazy').setup({
 
   {
     'folke/zen-mode.nvim',
-    ft = { 'markdown', 'ghmarkdown' },
+    ft = { 'markdown', 'ghmarkdown', 'text' },
     event = 'VimEnter',
     dependencies = { 'folke/twilight.nvim' },
     opts = {
       window = {
-        width = 0.85,
+        width = 0.65,
       },
     },
     config = function()
@@ -839,7 +830,7 @@ require('lazy').setup({
         },
         context = 30,
       }
-      vim.api.nvim_create_autocmd({ 'VimEnter', 'BufReadPost' }, {
+      vim.api.nvim_create_autocmd({ 'VimEnter' }, {
         desc = 'Zen mode for prose',
         group = vim.api.nvim_create_augroup('zen-mode', { clear = true }),
         pattern = { '*.md', '*.markdown', '*.txt' },
@@ -1013,7 +1004,6 @@ require('lazy').setup({
     opts = {
       ensure_installed = {
         'bash',
-        'c',
         'diff',
         'html',
         'lua',
