@@ -818,7 +818,7 @@ require('lazy').setup({
 
   {
     'folke/zen-mode.nvim',
-    ft = { 'markdown', 'ghmarkdown', 'text' },
+    ft = { 'markdown', 'ghmarkdown', 'text', 'gitcommit' },
     event = 'VimEnter',
     dependencies = { 'folke/twilight.nvim' },
     opts = {
@@ -836,7 +836,7 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd({ 'VimEnter' }, {
         desc = 'Zen mode for prose',
         group = vim.api.nvim_create_augroup('zen-mode', { clear = true }),
-        pattern = { '*.md', '*.markdown', '*.txt' },
+        pattern = { '*.md', '*.markdown', '*.txt', 'COMMIT_EDITMSG' },
         callback = function()
           require('zen-mode').open { window = { width = 0.65 } }
         end,
