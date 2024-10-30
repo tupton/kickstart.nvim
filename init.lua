@@ -251,6 +251,7 @@ vim.api.nvim_create_user_command('WA', 'wa<bang>', { bang = true, desc = 'Write 
 vim.api.nvim_create_user_command('Wa', 'wa<bang>', { bang = true, desc = 'Write all buffers' })
 vim.api.nvim_create_user_command('QA', 'qa<bang>', { bang = true, desc = 'Quit all buffers' })
 vim.api.nvim_create_user_command('Qa', 'qa<bang>', { bang = true, desc = 'Quit all buffers' })
+vim.api.nvim_create_user_command('Wqa', 'wqa<bang>', { bang = true, desc = 'Write and quit all buffers' })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
