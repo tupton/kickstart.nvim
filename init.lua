@@ -561,7 +561,7 @@ require('lazy').setup({
             },
           },
         },
-        pyright = {},
+        basedpyright = {},
         ruff_lsp = {},
         rust_analyzer = {},
       }
@@ -579,7 +579,6 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'eslint-lsp', -- Used to format js/ts
         'eslint_d', -- Used to format js/ts
         'prettierd', -- Used to format js/ts
         'rustywind', -- Format tailwind class names
