@@ -328,14 +328,12 @@ require('lazy').setup({
       'TmuxNavigateDown',
       'TmuxNavigateUp',
       'TmuxNavigateRight',
-      'TmuxNavigatePrevious',
     },
     keys = {
-      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
-      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
-      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
-      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
-      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>', desc = 'Focus window left' },
+      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>', desc = 'Focus window below' },
+      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>', desc = 'Focus window above' },
+      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>', desc = 'Focus window right' },
     },
   },
 
