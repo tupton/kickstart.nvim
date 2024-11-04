@@ -894,7 +894,7 @@ require('lazy').setup({
 
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_filename = function()
-        return '%f %#Todo#%m%#MinistatusLineFilename#'
+        return '%f %#DiffChange#%m%#MinistatusLineFilename#'
       end
 
       -- Similar to vim-sensible, but broader.
