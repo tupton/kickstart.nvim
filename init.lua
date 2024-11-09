@@ -553,7 +553,6 @@ require('lazy').setup({
             },
           },
         },
-        ts_ls = {},
         tailwindcss = {
           settings = {
             tailwindCSS = {
@@ -587,6 +586,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'biome', -- Used to format js/ts
+        'eslint', -- Used to format js/ts
         'eslint_d', -- Used to format js/ts
         'prettierd', -- Used to format js/ts
         'rustywind', -- Format tailwind class names
@@ -607,7 +608,11 @@ require('lazy').setup({
       }
     end,
   },
-
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
+  },
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
