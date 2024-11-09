@@ -568,7 +568,7 @@ require('lazy').setup({
             },
           },
         },
-        basedpyright = {},
+        pyright = {},
         ruff_lsp = {},
         rust_analyzer = {},
       }
