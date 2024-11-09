@@ -322,19 +322,20 @@ require('lazy').setup({
 
   -- Navigate between vim and tmux panes with the same keys
   {
-    'christoomey/vim-tmux-navigator',
-    cmd = {
-      'TmuxNavigateLeft',
-      'TmuxNavigateDown',
-      'TmuxNavigateUp',
-      'TmuxNavigateRight',
-    },
-    keys = {
-      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>', desc = 'Focus window left' },
-      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>', desc = 'Focus window below' },
-      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>', desc = 'Focus window above' },
-      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>', desc = 'Focus window right' },
-    },
+    'alexghergh/nvim-tmux-navigation',
+    config = function()
+      require('nvim-tmux-navigation').setup {
+        disable_when_zoomed = true, -- defaults to false
+        keybindings = {
+          left = '<C-h>',
+          down = '<C-j>',
+          up = '<C-k>',
+          right = '<C-l>',
+          last_active = '<C-\\>',
+          next = '<C-Space>',
+        },
+      }
+    end,
   },
 
   -- NOTE: Plugins can also be added by using a table,
