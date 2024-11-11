@@ -857,6 +857,16 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'uga-rosa/ccc.nvim',
+    opts = {
+      highlighter = {
+        auto_enable = true,
+      },
+      lsp = true,
+    },
+  },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -939,7 +949,7 @@ require('lazy').setup({
       -- Better un/commenting, text object
       require('mini.comment').setup()
 
-      -- Higlight the word under the cursor
+      -- Highlight the word under the cursor
       require('mini.cursorword').setup()
 
       -- f, t, F, T are repeatable motions
