@@ -963,6 +963,8 @@ require('lazy').setup({
         },
       }
 
+      require('mini.trailspace').setup()
+
       local miniclue = require 'mini.clue'
       miniclue.setup { -- cute prompts about bindings
         triggers = {
