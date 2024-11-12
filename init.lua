@@ -627,24 +627,33 @@ require('lazy').setup({
         desc = '[F]ormat buffer',
       },
     },
-    opts = {
-      notify_on_error = false,
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_format = 'fallback',
-      },
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- You can use 'stop_after_first' to un the first available formatter from the list
-        python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
-        javascript = { 'eslint_d', 'prettierd' },
-        javascriptreact = { 'eslint_d', 'prettierd' },
-        typescript = { 'eslint_d', 'prettierd' },
-        typescriptreact = { 'eslint_d', 'prettierd' },
-        markdown = { 'prettierd' },
-      },
-    },
+    config = function()
+      local format_ts = function(bufnr)
+        if require('conform').get_formatter_info('biome', bufnr).available then
+          return { 'biome_check' }
+        else
+          return { 'eslint', 'prettierd' }
+        end
+      end
+      require('conform').setup {
+        notify_on_error = false,
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_format = 'fallback',
+        },
+        formatters_by_ft = {
+          lua = { 'stylua' },
+          -- Conform can also run multiple formatters sequentially
+          -- You can use 'stop_after_first' to run the first available formatter from the list
+          python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
+          javascript = format_ts,
+          javascriptreact = format_ts,
+          typescript = format_ts,
+          typescriptreact = format_ts,
+          markdown = format_ts,
+        },
+      }
+    end,
   },
 
   { -- Autocompletion
