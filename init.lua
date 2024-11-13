@@ -637,7 +637,7 @@ require('lazy').setup({
     config = function()
       local format_ts = function(bufnr)
         if require('conform').get_formatter_info('biome', bufnr).available then
-          return { 'biome_check' }
+          return { 'biome-check' }
         else
           return { 'eslint', 'prettierd' }
         end
