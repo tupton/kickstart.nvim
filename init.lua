@@ -287,6 +287,13 @@ require('lazy').setup({
   -- :GBrowse with Github
   'tpope/vim-rhubarb',
 
+  {
+    'tpope/vim-vinegar',
+    init = function()
+      vim.cmd [[ nnoremap - -]]
+    end,
+  },
+
   -- JSON syntax, concealment
   {
     'elzr/vim-json',
