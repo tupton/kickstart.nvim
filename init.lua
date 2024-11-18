@@ -941,11 +941,18 @@ require('lazy').setup({
       require('mini.jump2d').setup {
         view = {
           dim = true,
-          n_steps_ahead = 1,
+          n_steps_ahead = 2,
         },
       }
 
       require('mini.trailspace').setup()
+
+      local indentscope = require 'mini.indentscope'
+      indentscope.setup {
+        draw = {
+          animation = indentscope.gen_animation.none(),
+        },
+      }
 
       local miniclue = require 'mini.clue'
       miniclue.setup { -- cute prompts about bindings
