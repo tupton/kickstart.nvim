@@ -635,29 +635,43 @@ require('lazy').setup({
       },
     },
     config = function()
-      local format_ts = function(bufnr)
-        if require('conform').get_formatter_info('biome', bufnr).available then
-          return { 'biome-check' }
-        else
-          return { 'eslint', 'prettierd' }
-        end
-      end
       require('conform').setup {
         notify_on_error = false,
         format_on_save = {
           timeout_ms = 500,
           lsp_format = 'fallback',
         },
+        formatters = {
+          ['biome-check'] = {
+            require_cwd = true,
+          },
+          eslint_d = {
+            -- for some reason, the default cwd for eslint_d only looks for package.json
+            cwd = require('conform.util').root_file {
+              '.eslintrc.js',
+              '.eslintrc.json',
+              '.eslintrc.yaml',
+              'eslint.config.js',
+              'eslint.config.mjs',
+              'eslint.config.cjs',
+              'eslint.config.ts',
+            },
+            require_cwd = true,
+          },
+          prettierd = {
+            require_cwd = true,
+          },
+        },
         formatters_by_ft = {
           lua = { 'stylua' },
           -- Conform can also run multiple formatters sequentially
           -- You can use 'stop_after_first' to run the first available formatter from the list
           python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
-          javascript = format_ts,
-          javascriptreact = format_ts,
-          typescript = format_ts,
-          typescriptreact = format_ts,
-          markdown = format_ts,
+          javascript = { 'biome-check', 'eslint_d', 'prettierd' },
+          javascriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
+          typescript = { 'biome-check', 'eslint_d', 'prettierd' },
+          typescriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
+          markdown = { 'prettierd', 'injected' },
         },
       }
     end,
