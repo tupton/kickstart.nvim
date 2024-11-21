@@ -578,6 +578,7 @@ require('lazy').setup({
         pyright = {},
         ruff = {},
         rust_analyzer = {},
+        stylelint_lsp = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -598,6 +599,7 @@ require('lazy').setup({
         'eslint_d', -- Used to format js/ts
         'prettierd', -- Used to format js/ts
         'rustywind', -- Format tailwind class names
+        'stylelint', -- Used to format css
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -672,6 +674,7 @@ require('lazy').setup({
           typescript = { 'biome-check', 'eslint_d', 'prettierd' },
           typescriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
           markdown = { 'prettierd', 'injected' },
+          css = { 'stylelint' },
         },
       }
     end,
