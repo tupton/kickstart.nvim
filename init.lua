@@ -229,7 +229,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Prose formatting and wrapped line display',
   group = vim.api.nvim_create_augroup('text-formatting', { clear = true }),
-  pattern = { 'markdown', 'ghmarkdown', 'gitcommit', 'text' },
+  pattern = { 'markdown', 'ghmarkdown', 'git*', 'text' },
   callback = function()
     vim.opt_local.textwidth = 0
     vim.opt_local.wrap = true
