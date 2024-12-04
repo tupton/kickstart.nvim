@@ -369,6 +369,24 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'f-person/git-blame.nvim',
+    opts = {
+      enabled = false,
+      date_format = '%r',
+      virtual_text_column = 100,
+    },
+    keys = {
+      {
+        '<leader>gb',
+        function()
+          vim.cmd.GitBlameToggle()
+        end,
+        desc = '[G]it [B]lame',
+      },
+    },
+  },
+
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
