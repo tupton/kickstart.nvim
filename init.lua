@@ -695,6 +695,7 @@ require('lazy').setup({
           typescriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
           markdown = { 'prettierd', 'injected' },
           css = { 'stylelint' },
+          ['*'] = { 'trim_whitespace' },
         },
       }
     end,
