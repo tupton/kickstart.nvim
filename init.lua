@@ -357,7 +357,16 @@ require('lazy').setup({
     'ibhagwan/fzf-lua',
     event = 'VimEnter',
     config = function()
-      require('fzf-lua').setup { { 'fzf-native' }, fzf_colors = true }
+      require('fzf-lua').setup {
+        { 'fzf-native' },
+        fzf_colors = true,
+        keymap = {
+          fzf = {
+            -- use C-q to select all items and convert to quickfix list
+            ['ctrl-q'] = 'select-all+accept',
+          },
+        },
+      }
       -- Use the fzf-lua UI for vim.ui.select
       require('fzf-lua').register_ui_select()
 
