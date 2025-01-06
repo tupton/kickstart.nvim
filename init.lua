@@ -607,6 +607,8 @@ require('lazy').setup({
         ruff = {},
         rust_analyzer = {},
         stylelint_lsp = {},
+        cssls = {},
+        css_variables = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -1075,6 +1077,7 @@ require('lazy').setup({
         'python',
         'typescript',
         'javascript',
+        'css',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
