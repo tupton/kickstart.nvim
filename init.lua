@@ -362,6 +362,8 @@ require('lazy').setup({
         fzf_colors = true,
         keymap = {
           fzf = {
+            -- inherits the default keymaps
+            true,
             -- use C-q to select all items and convert to quickfix list
             ['ctrl-q'] = 'select-all+accept',
           },
