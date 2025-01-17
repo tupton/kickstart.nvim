@@ -667,6 +667,8 @@ require('lazy').setup({
         stylelint_lsp = {},
         cssls = {},
         css_variables = {},
+        sqlls = {},
+        buf_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -765,6 +767,7 @@ require('lazy').setup({
           typescriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
           markdown = { 'prettierd', 'injected' },
           css = { 'stylelint' },
+          proto = { 'buf' },
           ['*'] = { 'trim_whitespace' },
         },
       }
