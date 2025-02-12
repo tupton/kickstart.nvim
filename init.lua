@@ -553,13 +553,13 @@ require('lazy').setup({
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', function()
-            fzf.lsp_definitions { jump_to_single_result = true }
+            fzf.lsp_definitions { jump1 = true }
           end, '[G]oto [D]efinition')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', function()
-            fzf.lsp_declarations { jump_to_single_result = true }
+            fzf.lsp_declarations { jump1 = true }
           end, '[G]oto [D]eclaration')
 
           -- Find references for the word under your cursor.
