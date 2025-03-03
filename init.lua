@@ -782,10 +782,10 @@ require('lazy').setup({
           -- Conform can also run multiple formatters sequentially
           -- You can use 'stop_after_first' to run the first available formatter from the list
           python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
-          javascript = { 'biome-check', 'eslint_d', 'prettierd' },
-          javascriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
-          typescript = { 'biome-check', 'eslint_d', 'prettierd' },
-          typescriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
+          javascript = { 'biome-check', 'rustywind', 'eslint_d', 'prettierd' },
+          javascriptreact = { 'biome-check', 'rustywind', 'eslint_d', 'prettierd' },
+          typescript = { 'biome-check', 'rustywind', 'eslint_d', 'prettierd' },
+          typescriptreact = { 'biome-check', 'rustywind', 'eslint_d', 'prettierd' },
           markdown = { 'prettierd', 'injected' },
           css = { 'stylelint' },
           proto = { 'buf' },
