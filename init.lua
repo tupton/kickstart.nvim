@@ -583,7 +583,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('g0', fzf.lsp_document_symbols, 'Document Symbols')
+          map('gO', fzf.lsp_document_symbols, 'Document Symbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
