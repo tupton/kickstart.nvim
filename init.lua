@@ -561,6 +561,21 @@ require('lazy').setup({
 
           local fzf = require 'fzf-lua'
 
+          -- Rename the variable under your cursor.
+          --  Most Language Servers support renaming across files, etc.
+          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+          -- Execute a code action, usually your cursor needs to be on top of an error
+          -- or a suggestion from your LSP for this to activate.
+          map('gra', fzf.lsp_code_actions, 'Code [A]ction', { 'n', 'x' })
+
+          -- Find references for the word under your cursor.
+          map('grr', fzf.lsp_references, '[G]oto [R]eferences')
+
+          -- Jump to the implementation of the word under your cursor.
+          --  Useful when your language has ways of declaring types without an actual implementation.
+          map('gri', fzf.lsp_implementations, '[G]oto [I]mplementation')
+
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
@@ -574,12 +589,13 @@ require('lazy').setup({
             fzf.lsp_declarations { jump1 = true }
           end, '[G]oto [D]eclaration')
 
-          -- Find references for the word under your cursor.
-          map('grr', fzf.lsp_references, '[G]oto [R]eferences')
+          -- Fuzzy find all the symbols in your current document.
+          --  Symbols are things like variables, functions, types, etc.
+          map('gO', fzf.lsp_document_symbols, 'Document Symbols')
 
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gri', fzf.lsp_implementations, '[G]oto [I]mplementation')
+          -- Fuzzy find all the symbols in your current workspace.
+          --  Similar to document symbols, except searches over your entire project.
+          map('gW', fzf.lsp_live_workspace_symbols, '[W]orkspace Symbols')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
@@ -587,18 +603,6 @@ require('lazy').setup({
           map('grt', function()
             fzf.lsp_typedefs { jump1 = true }
           end, '[T]ype Definition')
-
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
-          map('gO', fzf.lsp_document_symbols, 'Document Symbols')
-
-          -- Rename the variable under your cursor.
-          --  Most Language Servers support renaming across files, etc.
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-
-          -- Execute a code action, usually your cursor needs to be on top of an error
-          -- or a suggestion from your LSP for this to activate.
-          map('gra', fzf.lsp_code_actions, 'Code [A]ction', { 'n', 'x' })
         end,
       })
 
