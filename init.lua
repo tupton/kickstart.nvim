@@ -363,8 +363,15 @@ require('lazy').setup({
     event = 'VimEnter',
     config = function()
       require('fzf-lua').setup {
-        { 'fzf-native' },
+        { 'fzf-vim', 'fzf-tmux' },
         fzf_colors = true,
+        winopts = {
+          preview = {
+            default = 'bat',
+            hidden = false,
+            horizontal = 'right:40%',
+          },
+        },
         keymap = {
           fzf = {
             -- inherits the default keymaps
