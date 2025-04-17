@@ -190,7 +190,7 @@ vim.opt.formatoptions:append { t = true, c = true, r = true, o = true, n = true 
 vim.opt.equalalways = false
 
 -- Enable spell checking
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = 'en_us'
 
 -- Less busy diff views
@@ -707,6 +707,7 @@ require('lazy').setup({
         css_variables = {},
         sqlls = {},
         buf_ls = {},
+        harper_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
