@@ -245,6 +245,8 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.breakindent = true
     vim.opt_local.cpoptions:append 'n'
     vim.opt_local.showbreak = '» '
+    -- 2 to hide conceal text
+    vim.opt_local.conceallevel = 2
   end,
 })
 
@@ -975,7 +977,7 @@ require('lazy').setup({
     config = function()
       require('twilight').setup {
         dimming = {
-          alpha = 0.15,
+          alpha = 0.75,
         },
         context = 30,
       }
