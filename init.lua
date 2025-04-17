@@ -499,7 +499,10 @@ require('lazy').setup({
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        {
+          path = '${3rd}/luv/library',
+          words = { 'vim%.uv' },
+        },
       },
     },
   },
@@ -508,7 +511,7 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependents
+      { 'williamboman/mason.nvim', opts = {} }, -- NOTE: Must be loaded before dependents
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -833,12 +836,9 @@ require('lazy').setup({
     event = 'VimEnter',
     version = '1.*',
     dependencies = {
-      {
-        'supermaven-inc/supermaven-nvim',
-        opts = {},
-      },
-      { 'huijiro/blink-cmp-supermaven' },
-      { 'ribru17/blink-cmp-spell' },
+      { 'supermaven-inc/supermaven-nvim', opts = {} },
+      'huijiro/blink-cmp-supermaven',
+      'ribru17/blink-cmp-spell',
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -934,7 +934,12 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {},
+  },
 
   {
     'folke/trouble.nvim',
