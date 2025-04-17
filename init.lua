@@ -1219,6 +1219,44 @@ require('lazy').setup({
 
   -- Allow zip file reading
   'lbrayner/vim-rzip',
+  {
+    'obsidian-nvim/obsidian.nvim',
+    version = '*', -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = 'markdown',
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    --   -- refer to `:h file-pattern` for more examples
+    --   'BufReadPre '
+    --     .. vim.fn.expand '~'
+    --     .. '/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault/**/*.md',
+    --   'BufNewFile ' .. vim.fn.expand '~' .. '/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault/**/*.md',
+    -- },
+    dependencies = {
+      -- Required.
+      'nvim-lua/plenary.nvim',
+
+      -- Optional.
+      'saghen/blink.cmp',
+      'ibhagwan/fzf-lua',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {
+      workspaces = {
+        {
+          name = 'work',
+          path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault',
+        },
+      },
+      completion = {
+        nvim_cmp = false,
+        blink = true,
+        min_chars = 1,
+      },
+    },
+  },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
