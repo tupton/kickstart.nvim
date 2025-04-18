@@ -293,6 +293,7 @@ require('lazy').setup({
 
   -- :Gdiff, :Gcommit, etc.
   'tpope/vim-fugitive',
+
   -- :GBrowse with Github
   'tpope/vim-rhubarb',
 
@@ -492,8 +493,8 @@ require('lazy').setup({
 
   -- LSP Plugins
   {
-    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
+    -- `lazydev` configures Lua LSP for your Neovim config, runtime, and plugins
+    -- used for completion, annotations and signatures of Neovim APIs
     'folke/lazydev.nvim',
     ft = 'lua',
     opts = {
@@ -1225,6 +1226,8 @@ require('lazy').setup({
 
   -- Allow zip file reading
   'lbrayner/vim-rzip',
+
+  -- Edit and manage Obsidian notes and links
   {
     'obsidian-nvim/obsidian.nvim',
     version = '*', -- recommended, use latest release instead of latest commit
