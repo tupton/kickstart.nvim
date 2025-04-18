@@ -1104,8 +1104,16 @@ require('lazy').setup({
       -- Highlight the word under the cursor
       require('mini.cursorword').setup()
 
-      -- f, t, F, T are repeatable motions
-      require('mini.jump').setup()
+      -- t, f, T, F are repeatable motions
+      -- Highlight the next motion for subsequent tfTF motions
+      require('mini.jump').setup {
+        delay = {
+          -- Delay between jump and highlighting all possible jumps
+          highlight = 1000,
+          -- Delay between jump and automatic stop if idle (no jump is done)
+          idle_stop = 3000,
+        },
+      }
 
       -- Jump to locations with <enter>
       require('mini.jump2d').setup {
