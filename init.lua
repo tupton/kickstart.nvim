@@ -1121,6 +1121,11 @@ require('lazy').setup({
           dim = true,
           n_steps_ahead = 2,
         },
+        allowed_lines = {
+          cursor_at = false,
+          blank = false,
+          fold = false,
+        },
       }
 
       require('mini.trailspace').setup()
