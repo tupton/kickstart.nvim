@@ -1285,7 +1285,11 @@ require('lazy').setup({
     dependencies = {
       'MunifTanjim/nui.nvim',
     },
-    opts = {},
+    opts = {
+      disable_mouse = false,
+      max_count = 5,
+      max_time = 500,
+    },
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
