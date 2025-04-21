@@ -1,6 +1,6 @@
 {
   "biome": "1.9.4",
-  "buf": "v1.52.1",
+  "buf": "v1.53.0",
   "codespell": "2.4.1",
   "css-lsp": "4.10.0",
   "css-variables-language-server": "2.7.0",
@@ -11,7 +11,7 @@
   "prettierd": "0.26.1",
   "pyright": "1.1.399",
   "ruff": "0.11.6",
-  "rust-analyzer": "2025-04-14",
+  "rust-analyzer": "2025-04-21",
   "sqlls": "1.7.1",
   "stylelint": "16.18.0",
   "stylelint-lsp": "2.0.1",
