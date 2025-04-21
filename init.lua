@@ -709,7 +709,15 @@ require('lazy').setup({
         css_variables = {},
         sqlls = {},
         buf_ls = {},
-        harper_ls = {},
+        harper_ls = {
+          settings = {
+            ['harper-ls'] = {
+              linters = {
+                SentenceCapitalization = false,
+              },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
