@@ -1257,7 +1257,7 @@ require('lazy').setup({
     },
     opts = {
       disable_mouse = false,
-      max_count = 5,
+      max_count = 7,
       max_time = 500,
     },
   },
