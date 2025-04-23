@@ -297,6 +297,7 @@ require('lazy').setup({
   -- :GBrowse with Github
   'tpope/vim-rhubarb',
 
+  -- Netrw improvements
   {
     'tpope/vim-vinegar',
     init = function()
@@ -361,6 +362,7 @@ require('lazy').setup({
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
 
+  -- FZF-powered pickers for many lists: files, buffers, git, keymaps, etc.
   {
     'ibhagwan/fzf-lua',
     event = 'VimEnter',
@@ -396,6 +398,7 @@ require('lazy').setup({
     end,
   },
 
+  -- Inline line-wise git blame
   {
     'f-person/git-blame.nvim',
     opts = {
@@ -428,9 +431,11 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  { -- Useful plugin to show you pending keybinds.
+  -- Useful plugin to show you pending key bindings
+  {
     'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    -- Sets the loading event to 'VimEnter'
+    event = 'VimEnter',
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.opt.timeoutlen
@@ -477,8 +482,6 @@ require('lazy').setup({
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>g', group = '[G]it' },
-        { '<leader>r', group = '[R]ename' },
-        { '<leader>w', group = '[W]orkspace' },
         { '<leader>x', group = 'Diagnostics' },
       },
     },
@@ -492,9 +495,10 @@ require('lazy').setup({
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
   -- LSP Plugins
+
+  -- `lazydev` configures Lua LSP for your Neovim config, runtime, and plugins
+  -- used for completion, annotations and signatures of Neovim APIs
   {
-    -- `lazydev` configures Lua LSP for your Neovim config, runtime, and plugins
-    -- used for completion, annotations and signatures of Neovim APIs
     'folke/lazydev.nvim',
     ft = 'lua',
     opts = {
@@ -507,8 +511,9 @@ require('lazy').setup({
       },
     },
   },
+
+  -- Main LSP Configuration
   {
-    -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -760,6 +765,8 @@ require('lazy').setup({
       }
     end,
   },
+
+  -- Typescript specific LSP config
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
@@ -782,7 +789,9 @@ require('lazy').setup({
       },
     },
   },
-  { -- Autoformat
+
+  -- Autoformat
+  {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
@@ -928,6 +937,7 @@ require('lazy').setup({
     },
   },
 
+  -- Colorscheme
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -952,6 +962,7 @@ require('lazy').setup({
     opts = {},
   },
 
+  -- Diagnostics display
   {
     'folke/trouble.nvim',
     opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -980,6 +991,7 @@ require('lazy').setup({
     },
   },
 
+  -- Focus mode for prose filetypes
   {
     'folke/zen-mode.nvim',
     ft = { 'markdown', 'ghmarkdown', 'text', 'gitcommit' },
@@ -1008,6 +1020,7 @@ require('lazy').setup({
     end,
   },
 
+  -- Color highlighting
   {
     'uga-rosa/ccc.nvim',
     opts = {
@@ -1018,7 +1031,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Collection of various small independent plugins/modules
+  -- Collection of various small independent plugins/modules
+  {
     'echasnovski/mini.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     config = function()
@@ -1137,75 +1151,21 @@ require('lazy').setup({
         },
       }
 
+      -- Highlight trailing whitespace and automatically trim it on write
       require('mini.trailspace').setup()
 
+      -- Indent guides
       local indentscope = require 'mini.indentscope'
       indentscope.setup {
         draw = {
           animation = indentscope.gen_animation.none(),
         },
       }
-
-      -- local miniclue = require 'mini.clue'
-      -- miniclue.setup { -- cute prompts about bindings
-      --   triggers = {
-      --     { mode = 'n', keys = '<Leader>' },
-      --     { mode = 'x', keys = '<Leader>' },
-      --
-      --     -- Built-in completion
-      --     { mode = 'i', keys = '<C-x>' },
-      --
-      --     -- `g` key
-      --     { mode = 'n', keys = 'g' },
-      --     { mode = 'x', keys = 'g' },
-      --
-      --     -- Marks
-      --     { mode = 'n', keys = "'" },
-      --     { mode = 'n', keys = '`' },
-      --     { mode = 'x', keys = "'" },
-      --     { mode = 'x', keys = '`' },
-      --
-      --     -- Registers
-      --     { mode = 'n', keys = '"' },
-      --     { mode = 'x', keys = '"' },
-      --     { mode = 'i', keys = '<C-r>' },
-      --     { mode = 'c', keys = '<C-r>' },
-      --
-      --     -- Window commands
-      --     { mode = 'n', keys = '<C-w>' },
-      --
-      --     -- `z` key
-      --     { mode = 'n', keys = 'z' },
-      --     { mode = 'x', keys = 'z' },
-      --
-      --     -- Bracketed
-      --     { mode = 'n', keys = '[' },
-      --     { mode = 'n', keys = ']' },
-      --
-      --     -- Option toggles
-      --     { mode = 'n', keys = '\\' },
-      --   },
-      --   clues = {
-      --     miniclue.gen_clues.builtin_completion(),
-      --     miniclue.gen_clues.g(),
-      --     miniclue.gen_clues.marks(),
-      --     miniclue.gen_clues.registers(),
-      --     miniclue.gen_clues.windows(),
-      --     miniclue.gen_clues.z(),
-      --   },
-      --   window = {
-      --     delay = 100,
-      --     config = { width = 'auto' },
-      --     scroll_down = '<C-d>',
-      --     scroll_up = '<C-u>',
-      --   },
-      -- }
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  -- Highlight, edit, and navigate code
+  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
@@ -1288,7 +1248,8 @@ require('lazy').setup({
       },
     },
   },
-  -- lazy.nvim
+
+  -- Enforce better vim motions and text objects
   {
     'm4xshen/hardtime.nvim',
     dependencies = {
