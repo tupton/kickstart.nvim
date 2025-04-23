@@ -719,6 +719,7 @@ require('lazy').setup({
             ['harper-ls'] = {
               linters = {
                 SentenceCapitalization = false,
+                Spaces = false,
               },
             },
           },
