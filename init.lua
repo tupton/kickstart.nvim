@@ -706,7 +706,7 @@ require('lazy').setup({
             },
           },
         },
-        pyright = {},
+        basedpyright = {},
         ruff = {},
         rust_analyzer = {},
         stylelint_lsp = {},
