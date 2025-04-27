@@ -859,7 +859,6 @@ require('lazy').setup({
     dependencies = {
       { 'supermaven-inc/supermaven-nvim', opts = {} },
       'huijiro/blink-cmp-supermaven',
-      'ribru17/blink-cmp-spell',
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -905,21 +904,12 @@ require('lazy').setup({
       },
 
       sources = {
-        default = { 'lsp', 'supermaven', 'path', 'buffer', 'spell' },
+        default = { 'lsp', 'supermaven', 'path', 'buffer' },
         providers = {
           supermaven = {
             name = 'supermaven',
             module = 'blink-cmp-supermaven',
             async = true,
-          },
-          spell = {
-            name = 'spell',
-            module = 'blink-cmp-spell',
-            opts = {
-              -- If true, then completion candidates will be sorted using the same algorithm used by cmp-spell.
-              -- This can be helpful for sorting words that are partially typed. Otherwise, a custom sorting is used.
-              use_cmp_spell_sorting = true,
-            },
           },
         },
       },
