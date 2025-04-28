@@ -1096,7 +1096,14 @@ require('lazy').setup({
       }
 
       -- Keymaps for forwards/backwards objects, like vim-unimpaired
-      require('mini.bracketed').setup()
+      require('mini.bracketed').setup {
+        -- Use mappings from mini.indentscope
+        indent = { suffix = '' },
+
+        -- Disable mappings that are defined elsewhere
+        file = { suffix = '' },
+        window = { suffix = '' },
+      }
 
       -- Automatically pair brackets, parens, etc.
       require('mini.pairs').setup()
