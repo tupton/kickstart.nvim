@@ -1106,7 +1106,34 @@ require('lazy').setup({
       }
 
       -- Automatically pair brackets, parens, etc.
-      require('mini.pairs').setup()
+      require('mini.pairs').setup {
+        mappings = {
+          -- Single quote: Prevent pairing if either side is a letter
+          ['"'] = {
+            action = 'closeopen',
+            pair = '""',
+            neigh_pattern = '[^%w\\][^%w]',
+            register = { cr = false },
+          },
+          -- Single quote: Prevent pairing if either side is a letter
+          ["'"] = {
+            action = 'closeopen',
+            pair = "''",
+            neigh_pattern = '[^%w\\][^%w]',
+            register = { cr = false },
+          },
+          -- Backtick: Prevent pairing if either side is a letter
+          ['`'] = {
+            action = 'closeopen',
+            pair = '``',
+            neigh_pattern = '[^%w\\][^%w]',
+            register = { cr = false },
+          },
+        },
+        skip_ts = { 'string', 'comment' },
+        skip_unbalanced = true,
+        markdown = true,
+      }
 
       -- Diff hunk manipulation
       require('mini.diff').setup {
