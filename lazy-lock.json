@@ -1,5 +1,4 @@
 {
-  "blink-cmp-spell": { "branch": "master", "commit": "782bc76be09c0c5dd08e3edd04e4ec1054c3158e" },
   "blink-cmp-supermaven": { "branch": "main", "commit": "635ce12e9e2d2a5a483728ac764d0bc5b57af23b" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "ccc.nvim": { "branch": "main", "commit": "af2cf5a963f401aad868c065222ee13d4bbc9050" },
@@ -17,9 +16,9 @@
   "mini.nvim": { "branch": "main", "commit": "088d67751584e4168f35bca89bad70ada7ea4636" },
   "nord.nvim": { "branch": "master", "commit": "80c1e5321505aeb22b7a9f23eb82f1e193c12470" },
   "nui.nvim": { "branch": "main", "commit": "8d5b0b568517935d3c84f257f272ef004d9f5a59" },
-  "nvim-lspconfig": { "branch": "master", "commit": "88d0824d85c0f74a012521d25678a5b01c76feb1" },
+  "nvim-lspconfig": { "branch": "master", "commit": "94d0fec9135719e046903bbbbf8f39e3d3436d4e" },
   "nvim-tmux-navigation": { "branch": "main", "commit": "4898c98702954439233fdaf764c39636681e2861" },
-  "nvim-treesitter": { "branch": "master", "commit": "3b308861a8d7d7bfbe9be51d52e54dcfd9fe3d38" },
+  "nvim-treesitter": { "branch": "master", "commit": "94ea4f436d2b59c80f02e293466c374584f03b8c" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "ed373482db797bbf71bdff37a15c7555a84dce47" },
   "obsidian.nvim": { "branch": "main", "commit": "e0eb92c5afcacf5bf11e4735079a538fd1486ea9" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
