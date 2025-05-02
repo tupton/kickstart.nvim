@@ -1059,9 +1059,9 @@ require('lazy').setup({
         -- set use_icons to true if you have a Nerd Font
         use_icons = vim.g.have_nerd_font,
         content = {
-          -- show modified flag in inactive buffers
+          -- show modified flag in inactive windows
           inactive = function()
-            return '%#MiniStatuslineInactive#%F %#Todo#%m%#MiniStatuslineInactive#%='
+            return '%#MiniStatuslineInactive#%f %#Todo#%m%#MiniStatuslineInactive#%='
           end,
         },
       }
