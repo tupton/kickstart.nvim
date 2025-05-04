@@ -369,7 +369,7 @@ require('lazy').setup({
     config = function()
       local fzf = require 'fzf-lua'
       fzf.setup {
-        { 'fzf-vim', 'fzf-tmux' },
+        { 'fzf-tmux' },
         fzf_colors = true,
         winopts = {
           preview = {
