@@ -367,7 +367,8 @@ require('lazy').setup({
     'ibhagwan/fzf-lua',
     event = 'VimEnter',
     config = function()
-      require('fzf-lua').setup {
+      local fzf = require 'fzf-lua'
+      fzf.setup {
         { 'fzf-vim', 'fzf-tmux' },
         fzf_colors = true,
         winopts = {
@@ -386,15 +387,18 @@ require('lazy').setup({
           },
         },
       }
-      -- Use the fzf-lua UI for vim.ui.select
-      require('fzf-lua').register_ui_select()
 
-      local fzf = require 'fzf-lua'
+      -- Use the fzf-lua UI for vim.ui.select
+      fzf.register_ui_select()
+
       vim.keymap.set('n', '<leader><leader>', fzf.files, { desc = '[ ] Search files' })
-      vim.keymap.set('n', '<leader><Left>', fzf.buffers, { desc = '[←] Search buffers' })
-      vim.keymap.set('n', '<leader><Right>', fzf.git_status, { desc = '[→] Search git files with status' })
+      vim.keymap.set('n', "<leader>'", fzf.buffers, { desc = "['] Search buffers" })
+      vim.keymap.set('n', '<leader>,', fzf.git_files, { desc = '[,] Search git files' })
+      vim.keymap.set('n', '<leader><', fzf.git_status, { desc = '[<] Search git files with status' })
+      vim.keymap.set('n', '<leader>.', fzf.grep_cword, { desc = 'Search word under cursor' })
+      vim.keymap.set('n', '<leader>>', fzf.grep_cWORD, { desc = 'Search WORD under cursor' })
+      vim.keymap.set('n', '<leader>p', fzf.grep_project, { desc = 'Search [p]roject' })
       vim.keymap.set('n', 'z=', fzf.spell_suggest, { desc = 'Select suggested spelling' })
-      vim.keymap.set('n', '<leader>8', fzf.grep_cword, { desc = 'Search word under cursor' })
     end,
   },
 
