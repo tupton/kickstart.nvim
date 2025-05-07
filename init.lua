@@ -991,19 +991,12 @@ require('lazy').setup({
     'folke/zen-mode.nvim',
     ft = { 'markdown', 'ghmarkdown', 'text', 'gitcommit' },
     event = 'VimEnter',
-    dependencies = { 'folke/twilight.nvim' },
     opts = {
       window = {
         width = 0.65,
       },
     },
     config = function()
-      require('twilight').setup {
-        dimming = {
-          alpha = 0.75,
-        },
-        context = 30,
-      }
       vim.api.nvim_create_autocmd({ 'VimEnter' }, {
         desc = 'Zen mode for prose',
         group = vim.api.nvim_create_augroup('zen-mode', { clear = true }),
