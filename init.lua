@@ -232,15 +232,15 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('text-formatting', { clear = true }),
   pattern = { 'markdown', 'ghmarkdown', 'git*', 'text' },
   callback = function()
-    vim.opt_local.textwidth = 0
-    vim.opt_local.wrap = true
-    vim.opt_local.wrapmargin = 0
-    vim.opt_local.linebreak = true
-    vim.opt_local.breakindent = true
-    vim.opt_local.cpoptions:append 'n'
-    vim.opt_local.showbreak = '» '
+    vim.bo.textwidth = 0
+    vim.bo.wrapmargin = 0
+
+    vim.wo.wrap = true
+    vim.wo.linebreak = true
+    vim.wo.breakindent = true
+    vim.wo.showbreak = '» '
     -- 2 to hide conceal text
-    vim.opt_local.conceallevel = 2
+    vim.wo.conceallevel = 2
   end,
 })
 
