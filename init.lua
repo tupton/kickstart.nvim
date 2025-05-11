@@ -211,12 +211,6 @@ vim.o.confirm = true
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<nop>')
-vim.keymap.set('n', '<right>', '<nop>')
-vim.keymap.set('n', '<up>', '<nop>')
-vim.keymap.set('n', '<down>', '<nop>')
-
 -- Scroll more lines at a time
 vim.keymap.set('n', '<C-e>', '5<C-e>')
 vim.keymap.set('n', '<C-y>', '5<C-y>')
