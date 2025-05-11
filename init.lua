@@ -1222,6 +1222,16 @@ require('lazy').setup({
       },
       indent = { enable = true },
     },
+    config = function()
+      -- <C-l> jumps to the end of the current treesitter node
+      vim.keymap.set('i', '<C-L>', function()
+        local node = vim.treesitter.get_node()
+        if node ~= nil then
+          local row, col = node:end_()
+          pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
+        end
+      end, { desc = 'insjump' })
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
