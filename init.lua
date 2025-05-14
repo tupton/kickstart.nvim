@@ -294,6 +294,13 @@ require('lazy').setup({
   -- :GBrowse with Github
   'tpope/vim-rhubarb',
 
+  -- Allow zip file reading
+  'lbrayner/vim-rzip',
+
+  -- Prefer two-way merge with conflicts pre-resolved
+  -- Requires gitconfig changes to use as git mergetool
+  'samoshkin/vim-mergetool',
+
   -- Netrw improvements
   {
     'tpope/vim-vinegar',
@@ -330,10 +337,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  -- Prefer two-way merge with conflicts pre-resolved
-  -- Requires gitconfig changes to use as git mergetool
-  'samoshkin/vim-mergetool',
 
   -- Navigate between vim and tmux panes with the same keys
   {
@@ -1239,9 +1242,6 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
-
-  -- Allow zip file reading
-  'lbrayner/vim-rzip',
 
   -- Edit and manage Obsidian notes and links
   {
