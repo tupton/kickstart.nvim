@@ -23,6 +23,7 @@
   "obsidian.nvim": { "branch": "main", "commit": "d6b996733e76549dbbf4741c16640caead1dc8e0" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "55ad4fb76ab68460f700599b7449385f0c4e858e" },
+  "smear-cursor.nvim": { "branch": "main", "commit": "162703638203060b1d3412e73429d232bbd2627e" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },

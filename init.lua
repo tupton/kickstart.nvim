@@ -1296,6 +1296,18 @@ require('lazy').setup({
     },
   },
 
+  -- Smear cursor on motions
+  {
+    'sphamba/smear-cursor.nvim',
+    opts = {
+      stiffness = 0.8,
+      trailing_stiffness = 0.5,
+      stiffness_insert_mode = 0.6,
+      trailing_stiffness_insert_mode = 0.6,
+      distance_stop_animating = 0.5,
+    },
+  },
+
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
