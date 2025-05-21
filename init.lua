@@ -730,6 +730,7 @@ require('lazy').setup({
             },
           },
         },
+        gh_actions_ls = {},
       }
 
       -- Ensure the servers and tools above are installed

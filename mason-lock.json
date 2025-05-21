@@ -7,6 +7,7 @@
   "css-variables-language-server": "2.7.0",
   "eslint-lsp": "4.10.0",
   "eslint_d": "14.3.0",
+  "gh-actions-language-server": "0.0.3",
   "harper-ls": "v0.37.0",
   "lua-language-server": "3.14.0",
   "prettierd": "0.26.1",
