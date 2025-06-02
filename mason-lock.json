@@ -12,7 +12,7 @@
   "lua-language-server": "3.14.0",
   "prettierd": "0.26.1",
   "ruff": "0.11.12",
-  "rust-analyzer": "2025-05-26",
+  "rust-analyzer": "2025-06-02",
   "sqlls": "1.7.1",
   "stylelint": "16.20.0",
   "stylelint-lsp": "2.0.1",
