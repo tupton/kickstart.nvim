@@ -1282,6 +1282,7 @@ require('lazy').setup({
         blink = true,
         min_chars = 1,
       },
+      legacy_commands = false,
     },
   },
 
