@@ -731,6 +731,9 @@ require('lazy').setup({
           },
         },
         gh_actions_ls = {},
+        bashls = {
+          filetypes = { 'bash', 'sh', 'zsh' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -855,6 +858,8 @@ require('lazy').setup({
           markdown = { 'prettierd', 'injected' },
           css = { 'stylelint' },
           proto = { 'buf' },
+          bash = { 'shfmt' },
+          zsh = { 'shfmt' },
           ['*'] = { 'trim_whitespace' },
         },
       }
