@@ -736,6 +736,11 @@ require('lazy').setup({
         },
       }
 
+      -- Explicitly set up LSP servers before mason-lspconfig loads default configs
+      for name, config in pairs(servers) do
+        vim.lsp.config(name, config)
+      end
+
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install
