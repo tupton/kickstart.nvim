@@ -409,6 +409,7 @@ require('lazy').setup({
       enabled = false,
       date_format = '%r',
       virtual_text_column = 100,
+      use_blame_commit_file_urls = true,
     },
     keys = {
       {
