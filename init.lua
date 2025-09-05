@@ -411,6 +411,13 @@ require('lazy').setup({
       virtual_text_column = 100,
       use_blame_commit_file_urls = true,
     },
+    cmd = {
+      'GitBlameCopyCommitURL',
+      'GitBlameCopyFileURL',
+      'GitBlameOpenCommitURL',
+      'GitBlameOpenFileURL',
+      'GitBlameToggle',
+    },
     keys = {
       {
         '<leader>gb',
