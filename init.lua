@@ -245,16 +245,16 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- [[ User commands ]]
-vim.api.nvim_create_user_command('E', 'e<bang>', { bang = true, desc = 'Reload current buffer' })
-vim.api.nvim_create_user_command('W', 'w<bang>', { bang = true, desc = 'Write current buffer' })
-vim.api.nvim_create_user_command('Q', 'q<bang>', { bang = true, desc = 'Quit current buffer' })
-vim.api.nvim_create_user_command('WQ', 'wq<bang>', { bang = true, desc = 'Write and quit current buffer' })
-vim.api.nvim_create_user_command('Wq', 'wq<bang>', { bang = true, desc = 'Write and quit current buffer' })
-vim.api.nvim_create_user_command('WA', 'wa<bang>', { bang = true, desc = 'Write all buffers' })
-vim.api.nvim_create_user_command('Wa', 'wa<bang>', { bang = true, desc = 'Write all buffers' })
-vim.api.nvim_create_user_command('QA', 'qa<bang>', { bang = true, desc = 'Quit all buffers' })
-vim.api.nvim_create_user_command('Qa', 'qa<bang>', { bang = true, desc = 'Quit all buffers' })
-vim.api.nvim_create_user_command('Wqa', 'wqa<bang>', { bang = true, desc = 'Write and quit all buffers' })
+vim.api.nvim_create_user_command('E', 'e', { bang = true, desc = 'Reload current buffer' })
+vim.api.nvim_create_user_command('W', 'w', { bang = true, desc = 'Write current buffer' })
+vim.api.nvim_create_user_command('Q', 'q', { bang = true, desc = 'Quit current buffer' })
+vim.api.nvim_create_user_command('WQ', 'wq', { bang = true, desc = 'Write and quit current buffer' })
+vim.api.nvim_create_user_command('Wq', 'wq', { bang = true, desc = 'Write and quit current buffer' })
+vim.api.nvim_create_user_command('WA', 'wa', { bang = true, desc = 'Write all buffers' })
+vim.api.nvim_create_user_command('Wa', 'wa', { bang = true, desc = 'Write all buffers' })
+vim.api.nvim_create_user_command('QA', 'qa', { bang = true, desc = 'Quit all buffers' })
+vim.api.nvim_create_user_command('Qa', 'qa', { bang = true, desc = 'Quit all buffers' })
+vim.api.nvim_create_user_command('Wqa', 'wqa', { bang = true, desc = 'Write and quit all buffers' })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
