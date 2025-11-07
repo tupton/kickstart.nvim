@@ -917,7 +917,7 @@ require('lazy').setup({
       },
       -- Example of a keybinding to open Claude directly
       {
-        '<leader>ac',
+        '<leader>ao',
         function()
           require('sidekick.cli').toggle { name = 'opencode', focus = true }
         end,
