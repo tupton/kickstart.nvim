@@ -819,8 +819,9 @@ require('lazy').setup({
 
   {
     'zbirenbaum/copilot.lua',
+    requires = { 'copilotlsp-nvim/copilot-lsp' },
     cmd = 'Copilot',
-    event = 'VimEnter',
+    event = 'InsertEnter',
     opts = {
       suggestion = {
         enabled = true,
