@@ -326,6 +326,14 @@ require('lazy').setup {
       ft = 'json',
     },
 
+    {
+      'itspriddle/vim-marked',
+      init = function()
+        vim.g.marked_filetypes = { 'markdown', 'mkd', 'ghmarkdown', 'vimwiki' }
+        vim.g.marked_auto_quit = 0
+      end,
+    },
+
     -- Rainbow parens, brackets, etc. Also affects JSX/HTML nesting
     {
       'hiphish/rainbow-delimiters.nvim',
