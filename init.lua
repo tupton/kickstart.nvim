@@ -1372,7 +1372,7 @@ require('lazy').setup {
       },
       config = function()
         -- <C-l> jumps to the end of the current treesitter node
-        vim.keymap.set('i', '<C-L>', function()
+        vim.keymap.set('i', '<C-l>', function()
           local node = vim.treesitter.get_node()
           if node ~= nil then
             local row, col = node:end_()
