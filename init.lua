@@ -514,6 +514,8 @@ require('lazy').setup {
           { '<leader>d', group = '[D]ocument' },
           { '<leader>g', group = '[G]it' },
           { '<leader>x', group = 'Diagnostics' },
+          { 'gr', group = 'LSP Actions', mode = { 'n' } },
+          { 'C-w', group = '[W]indow', mode = { 'n' } },
         },
       },
     }, -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
