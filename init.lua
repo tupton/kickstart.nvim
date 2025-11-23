@@ -745,6 +745,7 @@ require('lazy').setup {
           sqlls = {},
           buf_ls = {},
           harper_ls = {
+            -- filetypes = { 'markdown', 'text', 'gitcommit', 'gitrebase' },
             settings = {
               ['harper-ls'] = {
                 linters = {
