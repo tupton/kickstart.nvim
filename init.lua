@@ -124,6 +124,9 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
+-- Disable swap files
+vim.o.swapfile = false
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -156,12 +159,15 @@ vim.o.cursorline = true
 vim.o.scrolloff = 10
 vim.o.sidescrolloff = 5
 
--- Don't wrap
+-- Do not wrap by default
 vim.o.wrap = false
 
 -- Set text width
 vim.o.textwidth = 100
 vim.o.colorcolumn = '+1'
+
+-- Set rounded window borders
+vim.o.winborder = 'single'
 
 -- From the Vim docs:
 -- t   Auto-wrap text using textwidth
@@ -189,7 +195,7 @@ vim.opt.formatoptions:append { t = true, c = true, r = true, o = true, n = true 
 -- Keep window sizes when closing others
 vim.o.equalalways = false
 
--- Enable spell checking
+-- Configure but disable spell checking by default because of Harper
 vim.o.spell = false
 vim.o.spelllang = 'en_us'
 
