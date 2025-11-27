@@ -90,58 +90,67 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- Make line numbers default
-vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
-vim.o.relativenumber = true
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+vim.o.confirm = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
-
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
-
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
--- vim.schedule(function()
---   vim.o.clipboard = 'unnamedplus'
--- end)
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
+vim.o.mousescroll = 'ver:25,hor:6'
 
 -- Disable swap files
 vim.o.swapfile = false
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
+-- Use already opened buffers when switching
+vim.o.switchbuf = 'usetab'
 
--- Keep signcolumn on by default
-vim.o.signcolumn = 'yes'
+-- Save undo history
+vim.o.undofile = true
+
+-- Limit ShaDa file (for startup)
+vim.o.shada = "'100,<50,s10,:1000,/100,@100,h"
+
+-- Enable all filetype plugins and syntax (if not enabled, for better startup)
+vim.cmd 'filetype plugin indent on'
+if vim.fn.exists 'syntax_on' ~= 1 then
+  vim.cmd 'syntax enable'
+end
 
 -- Decrease update time
 vim.o.updatetime = 250
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
 
--- Configure how new splits should be opened
-vim.o.splitright = true
-vim.o.splitbelow = true
+-- [[ UI options ]]
+-- Indent wrapped lines to match line start
+vim.o.breakindent = true
+
+-- with padding for lists if 'wrap' is set
+vim.o.breakindentopt = 'list:-1'
+
+-- Draw column on the right of maximum width
+vim.o.colorcolumn = '+1'
+
+-- Show which line your cursor is on
+vim.o.cursorline = true
+
+-- Show cursor line per screen line
+vim.o.cursorlineopt = 'screenline,number'
+
+-- Keep window sizes when closing others
+vim.o.equalalways = false
+
+-- Preview substitutions live, as you type!
+vim.o.inccommand = 'split'
+
+-- Wrap lines at 'breakat' (if 'wrap' is set)
+vim.o.linebreak = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -149,25 +158,57 @@ vim.o.splitbelow = true
 vim.o.list = false
 vim.opt.listchars = { tab = '⇥ ', trail = '·', nbsp = '␣', eol = '¬', extends = '❯', precedes = '❮' }
 
--- Preview substitutions live, as you type!
-vim.o.inccommand = 'split'
+-- Show line numbers
+vim.o.number = true
 
--- Show which line your cursor is on
-vim.o.cursorline = true
+-- Make popup menu smaller
+vim.o.pumheight = 10
+
+-- Show relative line numbers
+vim.o.relativenumber = true
+
+-- Don't show cursor coordinates
+vim.o.ruler = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 vim.o.sidescrolloff = 5
 
--- Do not wrap by default
-vim.o.wrap = false
+-- Disable some built-in completion messages
+vim.o.shortmess = 'CFOSWaco'
 
--- Set text width
-vim.o.textwidth = 100
-vim.o.colorcolumn = '+1'
+-- Don't show the mode, since it's already in the status line
+vim.o.showmode = false
+
+-- Keep signcolumn on by default
+vim.o.signcolumn = 'yes'
+
+-- Configure how new splits should be opened
+vim.o.splitbelow = true -- Horizontal splits will be below
+vim.o.splitkeep = 'screen' -- Reduce scroll during window split
+vim.o.splitright = true -- Vertical splits will be to the right
 
 -- Set rounded window borders
 vim.o.winborder = 'single'
+
+-- Do not wrap by default
+vim.o.wrap = false
+
+-- Less busy diff views
+vim.opt.diffopt:append { vertical = true, algorithm = 'histogram', ['indent-heuristic'] = true }
+vim.opt.fillchars:append { diff = ' ' }
+
+-- [[ Editing options ]]
+
+-- Use auto indent
+vim.o.autoindent = true
+
+-- Built-in completion
+vim.o.complete = '.,w,b,kspell' -- Use less sources
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
+
+-- Convert tabs to spaces
+vim.o.expandtab = true
 
 -- From the Vim docs:
 -- t   Auto-wrap text using textwidth
@@ -181,6 +222,11 @@ vim.o.winborder = 'single'
 -- o   Automatically insert the current comment leader after hitting 'o' or
 --     'O' in Normal mode.
 --
+-- q	 Allow formatting of comments with "gq".
+--  	 Note that formatting will not change blank lines or lines containing
+--  	 only the comment leader.  A new paragraph starts after such a line,
+--  	 or when the comment leader changes.
+--
 -- n   When formatting text, recognize numbered lists.  This actually uses
 --     the 'formatlistpat' option, thus any kind of list can be used.  The
 --     indent of the text after the number is used for the next line.  The
@@ -190,32 +236,54 @@ vim.o.winborder = 'single'
 --     Example:
 --         1. the first item
 --            wraps
-vim.opt.formatoptions:append { t = true, c = true, r = true, o = true, n = true }
+--
+-- l   Long lines are not broken in insert mode: When a line was longer than
+-- 	   'textwidth' when the insert command started, Vim does not
+-- 	   automatically format it.
+--
+-- 1	 Don't break a line after a one-letter word.  It's broken before it
+--	   instead (if possible).
+--
+-- j   Where it makes sense, remove a comment leader when joining lines.  For
+--    	example, joining:
+--    		int i;   // the index ~
+--    		         // in the list ~
+--    	Becomes:
+--    		int i;   // the index in the list ~
+vim.o.formatoptions = 'tcroqnl1j'
 
--- Keep window sizes when closing others
-vim.o.equalalways = false
+-- Case-insensitive searching by default
+vim.o.ignorecase = true
 
--- Configure but disable spell checking by default because of Harper
-vim.o.spell = false
-vim.o.spelllang = 'en_us'
+-- Show search matches while typing
+vim.o.incsearch = true
 
--- Less busy diff views
-vim.opt.diffopt:append { vertical = true, algorithm = 'histogram', ['indent-heuristic'] = true }
-vim.opt.fillchars:append { diff = ' ' }
+-- Infer case in built-in completion
+vim.o.infercase = true
 
 -- Show matching parens
 vim.o.showmatch = true
 
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
-vim.o.confirm = true
+-- Respect case in search if \C or one or more capital letters in the search term
+vim.o.smartcase = true
+
+-- Make indenting smart
+vim.o.smartindent = true
+
+-- Configure but disable spell checking by default because of Harper
+vim.o.spell = false
+vim.o.spelllang = 'en_us'
+vim.o.spelloptions = 'camel' -- Treat camelCase word parts as separate words
+
+-- Set text width
+vim.o.textwidth = 100
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>xd', vim.diagnostic.open_float, { desc = 'Open diagnostic [D]etails in floating window' })
 
 -- Scroll more lines at a time
 vim.keymap.set('n', '<C-e>', '5<C-e>')
@@ -292,6 +360,10 @@ vim.opt.rtp:prepend(lazypath)
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
+
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
 require('lazy').setup {
   spec = {
     -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -657,8 +729,8 @@ require('lazy').setup {
         -- See :help vim.diagnostic.Opts
         vim.diagnostic.config {
           severity_sort = true,
-          float = { border = 'rounded', source = 'if_many' },
-          underline = { severity = vim.diagnostic.severity.ERROR },
+          float = { border = 'single', source = 'if_many' },
+          underline = { severity = { min = vim.diagnostic.severity.WARN } },
           signs = vim.g.have_nerd_font and {
             text = {
               [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -668,10 +740,20 @@ require('lazy').setup {
             },
           } or {},
           virtual_text = {
+            current_line = true,
             source = 'if_many',
             spacing = 2,
+            severity = {
+              min = vim.diagnostic.severity.WARN,
+            },
           },
-          -- virtual_lines = true,
+          virtual_lines = {
+            current_line = true,
+            severity = {
+              min = vim.diagnostic.severity.ERROR,
+            },
+          },
+          update_in_insert = false,
         }
 
         -- LSP servers and clients are able to communicate to each other what features they support.
