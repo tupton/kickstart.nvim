@@ -484,8 +484,8 @@ require('lazy').setup {
 
         vim.keymap.set('n', '<leader><leader>', fzf.files, { desc = '[ ] Pick files' })
         vim.keymap.set('n', "<leader>'", fzf.buffers, { desc = "['] Pick buffers" })
-        vim.keymap.set('n', '<leader>,', fzf.git_files, { desc = '[,] Pick git files' })
-        vim.keymap.set('n', '<leader><', fzf.git_status, { desc = '[<] Pick git files with status' })
+        vim.keymap.set('n', '<leader><', fzf.git_files, { desc = '[<] Pick git files' })
+        vim.keymap.set('n', '<leader>,', fzf.git_status, { desc = '[,] Pick git files with status' })
         vim.keymap.set('n', '<leader>.', fzf.grep_cword, { desc = 'Search word under cursor' })
         vim.keymap.set('n', '<leader>>', fzf.grep_cWORD, { desc = 'Search WORD under cursor' })
         vim.keymap.set('n', '<leader>p', fzf.grep_project, { desc = 'Search [p]roject' })
