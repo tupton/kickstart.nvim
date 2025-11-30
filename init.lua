@@ -1271,6 +1271,7 @@ require('lazy').setup {
               i = { '@conditional.inner', '@loop.inner' },
             },
           },
+          search_method = 'cover',
         }
 
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
