@@ -1274,12 +1274,110 @@ require('lazy').setup {
           search_method = 'cover',
         }
 
-        -- Add/delete/replace surroundings (brackets, quotes, etc.)
-        --
-        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-        -- - sd'   - [S]urround [D]elete [']quotes
-        -- - sr)'  - [S]urround [R]eplace [)] [']
-        require('mini.surround').setup()
+        -- Similar to vim-sensible, but broader.
+        --   Some config and options above likely duplicate this.
+        require('mini.basics').setup {
+          options = {
+            basic = true,
+            extra_ui = true,
+          },
+          mappings = {
+            basic = false,
+            windows = true,
+          },
+          autocommands = {
+            basic = true,
+          },
+        }
+
+        -- Keymaps for forwards/backwards objects, like vim-unimpaired
+        require('mini.bracketed').setup {
+          -- Use mappings from mini.indentscope
+          indent = { suffix = '' },
+
+          -- Disable mappings that are defined elsewhere
+          file = { suffix = '' },
+          window = { suffix = '' },
+        }
+
+        -- Better un/commenting, text object
+        require('mini.comment').setup()
+
+        -- Highlight the word under the cursor
+        require('mini.cursorword').setup()
+
+        -- Diff hunk manipulation
+        require('mini.diff').setup {
+          view = {
+            style = 'sign',
+          },
+        }
+        vim.keymap.set('n', '<leader>do', require('mini.diff').toggle_overlay, { desc = 'Toggle [D]iff [O]verlay' })
+
+        -- Fun icons for filetypes, actions, signs, etc.
+        require('mini.icons').setup()
+
+        -- Indent guides
+        local indentscope = require 'mini.indentscope'
+        indentscope.setup {
+          draw = {
+            animation = indentscope.gen_animation.none(),
+          },
+        }
+
+        -- t, f, T, F are repeatable motions
+        -- Highlight the next motion for subsequent tfTF motions
+        require('mini.jump').setup {
+          delay = {
+            -- Delay between jump and highlighting all possible jumps
+            highlight = 1000,
+            -- Delay between jump and automatic stop if idle (no jump is done)
+            idle_stop = 3000,
+          },
+        }
+
+        -- Jump to locations with <enter>
+        require('mini.jump2d').setup {
+          view = {
+            dim = true,
+            n_steps_ahead = 2,
+          },
+          allowed_lines = {
+            cursor_at = false,
+            blank = false,
+            fold = false,
+          },
+        }
+
+        -- Automatically pair brackets, parens, etc.
+        require('mini.pairs').setup {
+          mappings = {
+            -- Double quote: Prevent pairing if either side is a letter
+            ['"'] = {
+              action = 'closeopen',
+              pair = '""',
+              neigh_pattern = '[^%w\\][^%w]',
+              register = { cr = false },
+            },
+            -- Single quote: Prevent pairing if either side is a letter
+            ["'"] = {
+              action = 'closeopen',
+              pair = "''",
+              neigh_pattern = '[^%w\\][^%w]',
+              register = { cr = false },
+            },
+            -- Backtick: Prevent pairing if either side is a letter
+            ['`'] = {
+              action = 'closeopen',
+              pair = '``',
+              neigh_pattern = '[^%w\\][^%w]',
+              register = { cr = false },
+            },
+          },
+          skip_ts = { 'string', 'comment' },
+          skip_unbalanced = true,
+          markdown = true,
+        }
 
         -- Simple and easy statusline.
         --  You could remove this setup call if you don't like it,
@@ -1309,113 +1407,15 @@ require('lazy').setup {
           return '%f %#DiffChange#%m%#MinistatusLineFilename#'
         end
 
-        -- Similar to vim-sensible, but broader.
-        --   Some config and options above likely duplicate this.
-        require('mini.basics').setup {
-          options = {
-            basic = true,
-            extra_ui = true,
-          },
-          mappings = {
-            basic = false,
-            windows = true,
-          },
-          autocommands = {
-            basic = true,
-          },
-        }
-
-        -- Keymaps for forwards/backwards objects, like vim-unimpaired
-        require('mini.bracketed').setup {
-          -- Use mappings from mini.indentscope
-          indent = { suffix = '' },
-
-          -- Disable mappings that are defined elsewhere
-          file = { suffix = '' },
-          window = { suffix = '' },
-        }
-
-        -- Automatically pair brackets, parens, etc.
-        require('mini.pairs').setup {
-          mappings = {
-            -- Single quote: Prevent pairing if either side is a letter
-            ['"'] = {
-              action = 'closeopen',
-              pair = '""',
-              neigh_pattern = '[^%w\\][^%w]',
-              register = { cr = false },
-            },
-            -- Single quote: Prevent pairing if either side is a letter
-            ["'"] = {
-              action = 'closeopen',
-              pair = "''",
-              neigh_pattern = '[^%w\\][^%w]',
-              register = { cr = false },
-            },
-            -- Backtick: Prevent pairing if either side is a letter
-            ['`'] = {
-              action = 'closeopen',
-              pair = '``',
-              neigh_pattern = '[^%w\\][^%w]',
-              register = { cr = false },
-            },
-          },
-          skip_ts = { 'string', 'comment' },
-          skip_unbalanced = true,
-          markdown = true,
-        }
-
-        -- Diff hunk manipulation
-        require('mini.diff').setup {
-          view = {
-            style = 'sign',
-          },
-        }
-        vim.keymap.set('n', '<leader>do', require('mini.diff').toggle_overlay, { desc = 'Toggle [D]iff [O]verlay' })
-
-        -- Fun icons for filetypes, actions, signs, etc.
-        require('mini.icons').setup()
-
-        -- Better un/commenting, text object
-        require('mini.comment').setup()
-
-        -- Highlight the word under the cursor
-        require('mini.cursorword').setup()
-
-        -- t, f, T, F are repeatable motions
-        -- Highlight the next motion for subsequent tfTF motions
-        require('mini.jump').setup {
-          delay = {
-            -- Delay between jump and highlighting all possible jumps
-            highlight = 1000,
-            -- Delay between jump and automatic stop if idle (no jump is done)
-            idle_stop = 3000,
-          },
-        }
-
-        -- Jump to locations with <enter>
-        require('mini.jump2d').setup {
-          view = {
-            dim = true,
-            n_steps_ahead = 2,
-          },
-          allowed_lines = {
-            cursor_at = false,
-            blank = false,
-            fold = false,
-          },
-        }
+        -- Add/delete/replace surroundings (brackets, quotes, etc.)
+        --
+        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+        -- - sd'   - [S]urround [D]elete [']quotes
+        -- - sr)'  - [S]urround [R]eplace [)] [']
+        require('mini.surround').setup()
 
         -- Highlight trailing whitespace and automatically trim it on write
         require('mini.trailspace').setup()
-
-        -- Indent guides
-        local indentscope = require 'mini.indentscope'
-        indentscope.setup {
-          draw = {
-            animation = indentscope.gen_animation.none(),
-          },
-        }
       end,
     },
 
