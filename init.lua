@@ -583,9 +583,10 @@ require('lazy').setup {
         -- Document existing key chains
         spec = {
           { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-          { '<leader>d', group = '[D]ocument' },
+          { '<leader>d', group = '[D]iff' },
           { '<leader>g', group = '[G]it' },
           { '<leader>x', group = 'Diagnostics' },
+          { '<leader>a', group = 'Sidekick', mode = { 'n', 'x' } },
           { 'gr', group = 'LSP Actions', mode = { 'n' } },
           { 'C-w', group = '[W]indow', mode = { 'n' } },
         },
