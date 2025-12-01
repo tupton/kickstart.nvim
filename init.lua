@@ -282,7 +282,8 @@ vim.o.textwidth = 100
 --  See `:help vim.keymap.set()`
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>xq', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>xl', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]ocation list' })
 vim.keymap.set('n', '<leader>xd', vim.diagnostic.open_float, { desc = 'Open diagnostic [D]etails in floating window' })
 
 -- Scroll more lines at a time
@@ -728,7 +729,14 @@ require('lazy').setup {
 
         -- Diagnostic Config
         -- See :help vim.diagnostic.Opts
-        vim.diagnostic.config {
+        local virtual_lines_config = {
+          current_line = true,
+          severity = {
+            min = vim.diagnostic.severity.ERROR,
+          },
+        }
+
+        local diagnostic_config = {
           severity_sort = true,
           float = { border = 'single', source = 'if_many' },
           underline = { severity = { min = vim.diagnostic.severity.WARN } },
@@ -748,14 +756,23 @@ require('lazy').setup {
               min = vim.diagnostic.severity.WARN,
             },
           },
-          virtual_lines = {
-            current_line = true,
-            severity = {
-              min = vim.diagnostic.severity.ERROR,
-            },
-          },
+          virtual_lines = false,
           update_in_insert = false,
         }
+
+        vim.diagnostic.config(diagnostic_config)
+
+        -- Function to toggle virtual_lines
+        local function toggle_virtual_lines()
+          if diagnostic_config.virtual_lines == false then
+            diagnostic_config.virtual_lines = virtual_lines_config
+          else
+            diagnostic_config.virtual_lines = false
+          end
+          vim.diagnostic.config(diagnostic_config)
+        end
+
+        vim.keymap.set('n', '<leader>xv', toggle_virtual_lines, { desc = 'Toggle diagnostic [V]irtual lines' })
 
         -- LSP servers and clients are able to communicate to each other what features they support.
         --  By default, Neovim doesn't support everything that is in the LSP specification.
