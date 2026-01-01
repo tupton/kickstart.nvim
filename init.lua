@@ -1407,7 +1407,7 @@ require('lazy').setup {
           content = {
             -- show modified flag in inactive windows
             inactive = function()
-              return '%#MiniStatuslineInactive#%F %#Todo#%m%#MiniStatuslineInactive#%r%='
+              return '%#MiniStatuslineFilename#%F %#Todo#%m%#MiniStatuslineFilename#%r%='
             end,
           },
         }
