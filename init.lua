@@ -1154,12 +1154,13 @@ require('lazy').setup {
         },
 
         sources = {
-          default = { 'lsp', 'copilot', 'path', 'buffer' },
+          default = { 'copilot', 'lsp', 'path', 'buffer' },
           providers = {
             copilot = {
               name = 'copilot',
               module = 'blink-copilot',
               async = true,
+              score_offset = 100, -- Make copilot suggestions have higher priority
             },
           },
         },
