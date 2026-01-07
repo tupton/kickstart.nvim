@@ -1407,7 +1407,11 @@ require('lazy').setup {
           content = {
             -- show modified flag in inactive windows
             inactive = function()
-              return '%#MiniStatuslineFilename#%F %#Todo#%m%#MiniStatuslineFilename#%r%='
+              vim.cmd 'hi MiniStatuslineInactiveMod guifg=#ebcb8b guibg=#2e3440'
+              if vim.bo.buftype == 'terminal' then
+                return '%t'
+              end
+              return '%#MiniStatuslineInactive#%f %#MiniStatuslineInactiveMod#%m%#MiniStatuslineInactive#%r'
             end,
           },
         }
