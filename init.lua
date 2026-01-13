@@ -1109,6 +1109,7 @@ require('lazy').setup {
       version = '1.*',
       dependencies = {
         { 'fang2hou/blink-copilot', opts = {} },
+        { 'Kaiser-Yang/blink-cmp-git' },
       },
       --- @module 'blink.cmp'
       --- @type blink.cmp.Config
@@ -1154,13 +1155,20 @@ require('lazy').setup {
         },
 
         sources = {
-          default = { 'copilot', 'lsp', 'path', 'buffer' },
+          default = { 'copilot', 'lsp', 'git', 'path', 'buffer' },
           providers = {
             copilot = {
               name = 'copilot',
               module = 'blink-copilot',
               async = true,
               score_offset = 100, -- Make copilot suggestions have higher priority
+            },
+            git = {
+              module = 'blink-cmp-git',
+              name = 'git',
+              enabled = function()
+                return vim.tbl_contains({ 'git', 'gitcommit', 'ghmarkdown', 'markdown' }, vim.bo.filetype)
+              end,
             },
           },
         },
