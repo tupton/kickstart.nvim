@@ -331,6 +331,25 @@ vim.api.nvim_create_user_command('QA', 'qa', { bang = true, desc = 'Quit all buf
 vim.api.nvim_create_user_command('Qa', 'qa', { bang = true, desc = 'Quit all buffers' })
 vim.api.nvim_create_user_command('Wqa', 'wqa', { bang = true, desc = 'Write and quit all buffers' })
 
+-- [[ Helper Functions ]]
+local function get_github_token_from_netrc()
+  local netrc_path = vim.fn.expand '~/.netrc'
+  local file = io.open(netrc_path, 'r')
+  if not file then
+    return ''
+  end
+  local token = ''
+  for line in file:lines() do
+    local machine, login, password = line:match 'machine api%.github%.com login (%S+) password (%S+)'
+    if machine and login and password then
+      token = password
+      break
+    end
+  end
+  file:close()
+  return token
+end
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 -- Bootstrap lazy.nvim
@@ -1169,6 +1188,26 @@ require('lazy').setup {
               enabled = function()
                 return vim.tbl_contains({ 'git', 'gitcommit', 'ghmarkdown', 'markdown' }, vim.bo.filetype)
               end,
+              --- @module 'blink-cmp-git'
+              --- @type blink-cmp-git.Options
+              opts = {
+                commit = {
+                  get_token = get_github_token_from_netrc,
+                },
+                git_centers = {
+                  github = {
+                    issue = {
+                      get_token = get_github_token_from_netrc,
+                    },
+                    pull_request = {
+                      get_token = get_github_token_from_netrc,
+                    },
+                    mention = {
+                      get_token = get_github_token_from_netrc,
+                    },
+                  },
+                },
+              },
             },
           },
         },
