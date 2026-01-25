@@ -1317,7 +1317,7 @@ require('lazy').setup {
     -- Collection of various small independent plugins/modules
     {
       'nvim-mini/mini.nvim',
-      dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+      dependencies = { { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' } },
       config = function()
         -- Better Around/Inside textobjects
         --
@@ -1496,39 +1496,71 @@ require('lazy').setup {
     -- Highlight, edit, and navigate code
     {
       'nvim-treesitter/nvim-treesitter',
-      branch = 'master',
+      lazy = false,
+      branch = 'main',
       build = ':TSUpdate',
-      main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-      opts = {
-        ensure_installed = {
+      -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
+      config = function()
+        -- The main branch of nvim-treesitter is a rewrite with different architecture.
+        -- Configure the install directory to use the lazy plugin directory
+        local ts = require 'nvim-treesitter'
+
+        local languages = {
           'bash',
+          'c',
+          'css',
           'diff',
+          'dockerfile',
+          'git_config',
+          'git_rebase',
+          'gitattributes',
+          'gitcommit',
+          'gitignore',
           'html',
+          'javascript',
+          'json',
           'lua',
           'luadoc',
           'markdown',
           'markdown_inline',
+          'python',
           'query',
+          'regex',
+          'rust',
+          'sql',
+          'toml',
+          'tsx',
+          'typescript',
           'vim',
           'vimdoc',
-          'python',
-          'typescript',
-          'javascript',
-          'css',
-        },
-        -- Autoinstall languages that are not installed
-        auto_install = true,
-        highlight = {
-          enable = true,
-          -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-          --  If you are experiencing weird indenting issues, add the language to
-          --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
-      },
-      config = function()
+          'yaml',
+        }
+        ts.install(languages)
+
+        local ts_start = function(ev)
+          vim.treesitter.start(ev.buf)
+          -- Enable treesitter highlighting for all filetypes
+          vim.treesitter.start(ev.buf)
+
+          -- Enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+
+        local filetypes = {}
+        for _, lang in ipairs(languages) do
+          for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
+            table.insert(filetypes, ft)
+          end
+        end
+        vim.api.nvim_create_autocmd('FileType', {
+          group = vim.api.nvim_create_augroup('start-treesitter', { clear = true }),
+          pattern = filetypes,
+          callback = ts_start,
+          desc = 'Start treesitter',
+        })
+
+        -- Install common parsers asynchronously (non-blocking startup)
+
         -- <C-l> jumps to the end of the current treesitter node
         vim.keymap.set('i', '<C-l>', function()
           local node = vim.treesitter.get_node()
@@ -1536,14 +1568,13 @@ require('lazy').setup {
             local row, col = node:end_()
             pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
           end
-        end, { desc = 'insjump' })
+        end, { desc = 'Jump to end of treesitter node' })
       end,
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
       --
-      --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects (using the `main` branch)
     },
 
     -- Edit and manage Obsidian notes and links
