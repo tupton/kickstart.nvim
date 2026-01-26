@@ -1537,13 +1537,12 @@ require('lazy').setup {
         }
         ts.install(languages)
 
-        local ts_start = function(ev)
-          vim.treesitter.start(ev.buf)
-          -- Enable treesitter highlighting for all filetypes
-          vim.treesitter.start(ev.buf)
-
-          -- Enable treesitter-based indentation
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- Shared function to enable treesitter for a buffer
+        ---@param buf integer?
+        local function enable_treesitter(buf)
+          buf = buf or 0
+          vim.treesitter.start(buf)
+          vim.api.nvim_set_option_value('indentexpr', "v:lua.require'nvim-treesitter'.indentexpr()", { buf = buf })
         end
 
         local filetypes = {}
@@ -1555,8 +1554,30 @@ require('lazy').setup {
         vim.api.nvim_create_autocmd('FileType', {
           group = vim.api.nvim_create_augroup('start-treesitter', { clear = true }),
           pattern = filetypes,
-          callback = ts_start,
-          desc = 'Start treesitter',
+          callback = function(ev)
+            enable_treesitter(ev.buf)
+          end,
+          desc = 'Enable treesitter',
+        })
+
+        -- Command to install a parser for a specific filetype
+        vim.api.nvim_create_user_command('TSInstallForFiletype', function(opts)
+          local filetype = opts.args ~= '' and opts.args or vim.bo.filetype
+          local lang = vim.treesitter.language.get_lang(filetype)
+
+          if not lang then
+            vim.notify('No treesitter language mapping for filetype: ' .. filetype, vim.log.levels.WARN)
+            return
+          end
+
+          vim.notify('Installing treesitter parser for ' .. lang .. '...', vim.log.levels.INFO)
+          -- Install the parser and wait for completion (5 minute timeout)
+          ts.install({ lang }):wait(300000)
+          enable_treesitter()
+          vim.notify('Installed and enabled treesitter for ' .. lang, vim.log.levels.INFO)
+        end, {
+          nargs = '?',
+          desc = 'Install treesitter parser for the current or specified filetype',
         })
 
         -- Install common parsers asynchronously (non-blocking startup)
