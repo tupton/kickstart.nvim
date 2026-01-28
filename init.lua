@@ -1449,13 +1449,14 @@ require('lazy').setup {
         --  You could remove this setup call if you don't like it,
         --  and try some other statusline plugin
         local statusline = require 'mini.statusline'
+        -- Add custom highlights for inactive statusline
+        vim.cmd 'hi MiniStatuslineInactiveMod guifg=#ebcb8b guibg=#2e3440'
         statusline.setup {
           -- set use_icons to true if you have a Nerd Font
           use_icons = vim.g.have_nerd_font,
           content = {
             -- show modified flag in inactive windows
             inactive = function()
-              vim.cmd 'hi MiniStatuslineInactiveMod guifg=#ebcb8b guibg=#2e3440'
               if vim.bo.buftype == 'terminal' then
                 return '%t'
               end
