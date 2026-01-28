@@ -1460,7 +1460,7 @@ require('lazy').setup {
               if vim.bo.buftype == 'terminal' then
                 return '%t'
               end
-              return '%#MiniStatuslineInactive#%f %#MiniStatuslineInactiveMod#%m%#MiniStatuslineInactive#%r'
+              return '%#MiniStatuslineInactive#%f %#MiniStatuslineInactiveMod#%m%#MiniStatuslineInactive#%r%='
             end,
           },
         }
