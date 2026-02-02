@@ -772,7 +772,7 @@ require('lazy').setup {
             source = 'if_many',
             spacing = 2,
             severity = {
-              min = vim.diagnostic.severity.WARN,
+              min = vim.diagnostic.severity.HINT,
             },
           },
           virtual_lines = false,
