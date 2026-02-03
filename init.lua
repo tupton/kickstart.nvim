@@ -118,9 +118,7 @@ vim.o.shada = "'100,<50,s10,:1000,/100,@100,h"
 
 -- Enable all filetype plugins and syntax (if not enabled, for better startup)
 vim.cmd 'filetype plugin indent on'
-if vim.fn.exists 'syntax_on' ~= 1 then
-  vim.cmd 'syntax enable'
-end
+if vim.fn.exists 'syntax_on' ~= 1 then vim.cmd 'syntax enable' end
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -296,9 +294,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Jump to last cursor position',
   group = vim.api.nvim_create_augroup('last-cursor-position', { clear = true }),
   callback = function()
-    if vim.bo.filetype:sub(1, 3) ~= 'git' and vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
-      vim.cmd 'normal! g`"'
-    end
+    if vim.bo.filetype:sub(1, 3) ~= 'git' and vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then vim.cmd 'normal! g`"' end
   end,
 })
 
@@ -335,9 +331,7 @@ vim.api.nvim_create_user_command('Wqa', 'wqa', { bang = true, desc = 'Write and 
 local function get_github_token_from_netrc()
   local netrc_path = vim.fn.expand '~/.netrc'
   local file = io.open(netrc_path, 'r')
-  if not file then
-    return ''
-  end
+  if not file then return '' end
   local token = ''
   for line in file:lines() do
     local machine, login, password = line:match 'machine api%.github%.com login (%S+) password (%S+)'
@@ -407,9 +401,7 @@ require('lazy').setup {
     -- Netrw improvements
     {
       'tpope/vim-vinegar',
-      init = function()
-        vim.cmd [[ nnoremap - -]]
-      end,
+      init = function() vim.cmd [[ nnoremap - -]] end,
     },
 
     -- JSON syntax, concealment
@@ -448,7 +440,6 @@ require('lazy').setup {
         }
       end,
     },
-
     -- Navigate between vim and tmux panes with the same keys
     {
       'alexghergh/nvim-tmux-navigation',
@@ -465,7 +456,6 @@ require('lazy').setup {
         }
       end,
     },
-
     -- NOTE: Plugins can also be added by using a table,
     -- with the first argument being the link and the following
     -- keys can be used to configure plugin behavior/loading/etc.
@@ -532,9 +522,7 @@ require('lazy').setup {
       keys = {
         {
           '<leader>gb',
-          function()
-            vim.cmd.GitBlameToggle()
-          end,
+          function() vim.cmd.GitBlameToggle() end,
           desc = '[G]it [B]lame',
         },
       },
@@ -719,15 +707,11 @@ require('lazy').setup {
             -- Jump to the definition of the word under your cursor.
             --  This is where a variable was first declared, or where a function is defined, etc.
             --  To jump back, press <C-t>.
-            map('grd', function()
-              fzf.lsp_definitions { jump1 = true }
-            end, '[G]oto [D]efinition')
+            map('grd', function() fzf.lsp_definitions { jump1 = true } end, '[G]oto [D]efinition')
 
             -- WARN: This is not Goto Definition, this is Goto Declaration.
             --  For example, in C this would take you to the header.
-            map('grD', function()
-              fzf.lsp_declarations { jump1 = true }
-            end, '[G]oto [D]eclaration')
+            map('grD', function() fzf.lsp_declarations { jump1 = true } end, '[G]oto [D]eclaration')
 
             -- Fuzzy find all the symbols in your current document.
             --  Symbols are things like variables, functions, types, etc.
@@ -740,9 +724,7 @@ require('lazy').setup {
             -- Jump to the type of the word under your cursor.
             --  Useful when you're not sure what type a variable is and you want to see
             --  the definition of its *type*, not where it was *defined*.
-            map('grt', function()
-              fzf.lsp_typedefs { jump1 = true }
-            end, '[T]ype Definition')
+            map('grt', function() fzf.lsp_typedefs { jump1 = true } end, '[T]ype Definition')
           end,
         })
 
@@ -885,9 +867,7 @@ require('lazy').setup {
 
         -- Explicitly set up LSP servers before mason-lspconfig loads default configs
         for server, config in pairs(vim.tbl_extend('keep', servers, external_servers)) do
-          if not vim.tbl_isempty(config) then
-            vim.lsp.config(server, config)
-          end
+          if not vim.tbl_isempty(config) then vim.lsp.config(server, config) end
         end
 
         -- Ensure the servers and tools above are installed
@@ -920,9 +900,7 @@ require('lazy').setup {
         }
 
         -- Enable extra server not managed by Mason, if any
-        if not vim.tbl_isempty(external_servers) then
-          vim.lsp.enable(vim.tbl_keys(external_servers))
-        end
+        if not vim.tbl_isempty(external_servers) then vim.lsp.enable(vim.tbl_keys(external_servers)) end
       end,
     },
 
@@ -988,72 +966,54 @@ require('lazy').setup {
         },
         {
           '<c-.>',
-          function()
-            require('sidekick.cli').toggle()
-          end,
+          function() require('sidekick.cli').toggle() end,
           desc = 'Sidekick Toggle',
           mode = { 'n', 't', 'i', 'x' },
         },
         {
           '<leader>aa',
-          function()
-            require('sidekick.cli').toggle()
-          end,
+          function() require('sidekick.cli').toggle() end,
           desc = 'Sidekick Toggle CLI',
         },
         {
           '<leader>as',
-          function()
-            require('sidekick.cli').select()
-          end,
+          function() require('sidekick.cli').select() end,
           -- Or to select only installed tools:
           -- require("sidekick.cli").select({ filter = { installed = true } })
           desc = 'Select CLI',
         },
         {
           '<leader>ad',
-          function()
-            require('sidekick.cli').close()
-          end,
+          function() require('sidekick.cli').close() end,
           desc = 'Detach a CLI Session',
         },
         {
           '<leader>at',
-          function()
-            require('sidekick.cli').send { msg = '{this}' }
-          end,
+          function() require('sidekick.cli').send { msg = '{this}' } end,
           mode = { 'x', 'n' },
           desc = 'Send This',
         },
         {
           '<leader>af',
-          function()
-            require('sidekick.cli').send { msg = '{file}' }
-          end,
+          function() require('sidekick.cli').send { msg = '{file}' } end,
           desc = 'Send File',
         },
         {
           '<leader>av',
-          function()
-            require('sidekick.cli').send { msg = '{selection}' }
-          end,
+          function() require('sidekick.cli').send { msg = '{selection}' } end,
           mode = { 'x' },
           desc = 'Send Visual Selection',
         },
         {
           '<leader>ap',
-          function()
-            require('sidekick.cli').prompt()
-          end,
+          function() require('sidekick.cli').prompt() end,
           mode = { 'n', 'x' },
           desc = 'Sidekick Select Prompt',
         },
         -- Example of a keybinding to open Claude directly
         {
           '<leader>ao',
-          function()
-            require('sidekick.cli').toggle { name = 'opencode', focus = true }
-          end,
+          function() require('sidekick.cli').toggle { name = 'opencode', focus = true } end,
           desc = 'Sidekick Toggle OpenCode',
         },
       },
@@ -1067,9 +1027,7 @@ require('lazy').setup {
       keys = {
         {
           '<leader>f',
-          function()
-            require('conform').format { async = true, lsp_format = 'fallback' }
-          end,
+          function() require('conform').format { async = true, lsp_format = 'fallback' } end,
           mode = '',
           desc = '[F]ormat buffer',
         },
@@ -1185,9 +1143,7 @@ require('lazy').setup {
             git = {
               module = 'blink-cmp-git',
               name = 'git',
-              enabled = function()
-                return vim.tbl_contains({ 'git', 'gitcommit', 'ghmarkdown', 'markdown' }, vim.bo.filetype)
-              end,
+              enabled = function() return vim.tbl_contains({ 'git', 'gitcommit', 'ghmarkdown', 'markdown' }, vim.bo.filetype) end,
               --- @module 'blink-cmp-git'
               --- @type blink-cmp-git.Options
               opts = {
@@ -1211,7 +1167,6 @@ require('lazy').setup {
             },
           },
         },
-
         -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
         -- which automatically downloads a prebuilt binary when enabled.
         --
@@ -1296,9 +1251,7 @@ require('lazy').setup {
           desc = 'Zen mode for prose',
           group = vim.api.nvim_create_augroup('zen-mode', { clear = true }),
           pattern = { '*.md', '*.markdown', '*.txt', 'COMMIT_EDITMSG' },
-          callback = function()
-            require('zen-mode').open { window = { width = 0.65 } }
-          end,
+          callback = function() require('zen-mode').open { window = { width = 0.65 } } end,
         })
       end,
     },
@@ -1457,9 +1410,7 @@ require('lazy').setup {
           content = {
             -- show modified flag in inactive windows
             inactive = function()
-              if vim.bo.buftype == 'terminal' then
-                return '%t'
-              end
+              if vim.bo.buftype == 'terminal' then return '%t' end
               return '%#MiniStatuslineInactive#%f %#MiniStatuslineInactiveMod#%m%#MiniStatuslineInactive#%r%='
             end,
           },
@@ -1555,9 +1506,7 @@ require('lazy').setup {
         vim.api.nvim_create_autocmd('FileType', {
           group = vim.api.nvim_create_augroup('start-treesitter', { clear = true }),
           pattern = filetypes,
-          callback = function(ev)
-            enable_treesitter(ev.buf)
-          end,
+          callback = function(ev) enable_treesitter(ev.buf) end,
           desc = 'Enable treesitter',
         })
 
