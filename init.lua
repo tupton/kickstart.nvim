@@ -1629,6 +1629,21 @@ require('lazy').setup {
       },
     },
 
+    -- Custom plugin to load Ghostty's vim files
+    {
+      dir = (vim.env.GHOSTTY_RESOURCES_DIR or '') .. '/../nvim/site',
+      lazy = false, -- Ensures it loads for Ghostty config detection
+      name = 'ghostty', -- Avoids the name being "vimfiles"
+      cond = vim.env.GHOSTTY_RESOURCES_DIR ~= nil, -- Only load if Ghostty is installed
+      -- The default ftdetect looks for */ghostty/config, but it is in a different location on MacOS.
+      init = function()
+        vim.api.nvim_create_autocmd('BufRead', {
+          pattern = '*/com.mitchellh.ghostty/config',
+          callback = function() vim.bo.filetype = 'ghostty' end,
+        })
+      end,
+    },
+
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
     -- place them in the correct locations.
