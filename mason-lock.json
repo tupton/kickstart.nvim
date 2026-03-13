@@ -12,7 +12,7 @@
   "harper-ls": "v1.10.0",
   "lua-language-server": "3.17.1",
   "prettierd": "0.27.0",
-  "ruff": "0.15.5",
+  "ruff": "0.15.6",
   "rust-analyzer": "2026-03-09",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.13.0",
