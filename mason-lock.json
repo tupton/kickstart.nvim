@@ -11,14 +11,14 @@
   "harper-ls": "v1.12.0",
   "lua-language-server": "3.17.1",
   "prettierd": "0.27.0",
-  "ruff": "0.15.7",
+  "ruff": "0.15.8",
   "rust-analyzer": "2026-03-23",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.13.0",
   "sqlls": "1.7.1",
-  "stylelint": "17.5.0",
+  "stylelint": "17.6.0",
   "stylelint-lsp": "2.0.1",
   "stylua": "v2.4.0",
   "tailwindcss-language-server": "0.14.29",
-  "ty": "0.0.25"
+  "ty": "0.0.26"
 }
