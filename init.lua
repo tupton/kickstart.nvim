@@ -850,7 +850,7 @@ require('lazy').setup {
               },
             },
           },
-          basedpyright = {},
+          ty = {},
           ruff = {},
           rust_analyzer = {},
           stylelint_lsp = {},
