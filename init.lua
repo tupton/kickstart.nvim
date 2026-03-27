@@ -957,8 +957,39 @@ require('lazy').setup {
     {
       'folke/sidekick.nvim',
       opts = {
-        -- add any options here
         cli = {
+          win = {
+            keys = {
+              nav_left = {
+                '<C-h>',
+                function() vim.schedule(require('nvim-tmux-navigation').NvimTmuxNavigateLeft) end,
+                mode = 't',
+                expr = false,
+                desc = 'Navigate Left',
+              },
+              nav_down = {
+                '<C-j>',
+                function() vim.schedule(require('nvim-tmux-navigation').NvimTmuxNavigateDown) end,
+                mode = 't',
+                expr = false,
+                desc = 'Navigate Down',
+              },
+              nav_up = {
+                '<C-k>',
+                function() vim.schedule(require('nvim-tmux-navigation').NvimTmuxNavigateUp) end,
+                mode = 't',
+                expr = false,
+                desc = 'Navigate Up',
+              },
+              nav_right = {
+                '<C-l>',
+                function() vim.schedule(require('nvim-tmux-navigation').NvimTmuxNavigateRight) end,
+                mode = 't',
+                expr = false,
+                desc = 'Navigate Right',
+              },
+            },
+          },
           mux = {
             backend = 'tmux',
             enabled = true,
