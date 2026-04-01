@@ -853,7 +853,7 @@ require('lazy').setup {
           ty = {},
           ruff = {},
           rust_analyzer = {},
-          stylelint_lsp = {},
+          ['stylelint-language-server'] = {},
           cssls = {},
           css_variables = {},
           sqlls = {},
