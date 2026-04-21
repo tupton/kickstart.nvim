@@ -1429,13 +1429,6 @@ require('lazy').setup {
               neigh_pattern = '[^%w\\][^%w]',
               register = { cr = false },
             },
-            -- Backtick: Prevent pairing if either side is a letter
-            ['`'] = {
-              action = 'closeopen',
-              pair = '``',
-              neigh_pattern = '[^%w\\][^%w]',
-              register = { cr = false },
-            },
           },
           skip_ts = { 'string', 'comment' },
           skip_unbalanced = true,
