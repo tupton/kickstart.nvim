@@ -748,8 +748,9 @@ require('lazy').setup {
         }
 
         local diagnostic_config = {
+          update_in_insert = false,
           severity_sort = true,
-          float = { border = 'single', source = 'if_many' },
+          float = { border = 'rounded', source = 'if_many' },
           underline = { severity = { min = vim.diagnostic.severity.WARN } },
           signs = vim.g.have_nerd_font and {
             text = {
@@ -768,7 +769,6 @@ require('lazy').setup {
             },
           },
           virtual_lines = false,
-          update_in_insert = false,
         }
 
         vim.diagnostic.config(diagnostic_config)
