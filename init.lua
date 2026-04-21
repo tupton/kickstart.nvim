@@ -1324,6 +1324,11 @@ require('lazy').setup {
         --  - ci'  - [C]hange [I]nside [']quote
         local spec_treesitter = require('mini.ai').gen_spec.treesitter
         require('mini.ai').setup {
+          -- NOTE: Avoid conflicts with the built-in incremental selection mappings on Neovim>=0.12 (see `:help treesitter-incremental-selection`)
+          mappings = {
+            around_next = 'aa',
+            inside_next = 'ii',
+          },
           custom_textobjects = {
             F = spec_treesitter {
               a = '@function.outer',
