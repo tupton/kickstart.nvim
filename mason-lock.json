@@ -20,5 +20,6 @@
   "stylelint-language-server": "1.1.1",
   "stylua": "v2.4.1",
   "tailwindcss-language-server": "0.14.29",
+  "taplo": "0.10.0",
   "ty": "0.0.32"
 }
