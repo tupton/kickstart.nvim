@@ -1,7 +1,7 @@
 {
   "bash-language-server": "5.6.0",
   "biome": "2.4.13",
-  "buf": "v1.68.4",
+  "buf": "v1.69.0",
   "codespell": "2.4.2",
   "css-lsp": "4.10.0",
   "css-variables-language-server": "2.8.4",
