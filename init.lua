@@ -1518,7 +1518,7 @@ require('lazy').setup {
           if has_indent_query then vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
         end
 
-        local available_parsers = require('nvim-treesitter').get_available()
+        local available_parsers = ts.get_available()
         vim.api.nvim_create_autocmd('FileType', {
           callback = function(args)
             local buf, filetype = args.buf, args.match
@@ -1526,7 +1526,7 @@ require('lazy').setup {
             local language = vim.treesitter.language.get_lang(filetype)
             if not language then return end
 
-            local installed_parsers = require('nvim-treesitter').get_installed 'parsers'
+            local installed_parsers = ts.get_installed 'parsers'
 
             if vim.tbl_contains(installed_parsers, language) then
               -- enable the parser if it is installed
@@ -1534,7 +1534,7 @@ require('lazy').setup {
             elseif vim.tbl_contains(available_parsers, language) then
               -- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
               vim.notify('Installing treesitter parser for ' .. language .. '...', vim.log.levels.INFO)
-              require('nvim-treesitter').install(language):await(function() treesitter_try_attach(buf, language) end)
+              ts.install(language):await(function() treesitter_try_attach(buf, language) end)
             else
               -- try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
               treesitter_try_attach(buf, language)
