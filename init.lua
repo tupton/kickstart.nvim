@@ -330,6 +330,14 @@ vim.api.nvim_create_user_command('Wa', 'wa', { bang = true, desc = 'Write all bu
 vim.api.nvim_create_user_command('QA', 'qa', { bang = true, desc = 'Quit all buffers' })
 vim.api.nvim_create_user_command('Qa', 'qa', { bang = true, desc = 'Quit all buffers' })
 vim.api.nvim_create_user_command('Wqa', 'wqa', { bang = true, desc = 'Write and quit all buffers' })
+vim.api.nvim_create_user_command('PackUpdate', function(opts)
+  local args = opts.fargs
+  if #args == 0 then
+    vim.pack.update()
+  else
+    vim.pack.update(args)
+  end
+end, { nargs = '*', desc = 'Update vim.pack plugins', complete = 'packadd' })
 
 -- [[ Helper Functions ]]
 local function get_github_token_from_netrc()
