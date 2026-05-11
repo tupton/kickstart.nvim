@@ -26,7 +26,7 @@
       "src": "https://github.com/copilotlsp-nvim/copilot-lsp"
     },
     "copilot.lua": {
-      "rev": "b57ee71bc6671aae055ef1911b3f72771219bb2d",
+      "rev": "18a58c62b20b7c724da808ef6d8fb002673b903f",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "fidget.nvim": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "60b5aaac2f0465d67699702e76b9baebf52cb42f",
+      "rev": "a5fda91040763cf9ad70bdce1c656b0f4ba1d16e",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nord.nvim": {
@@ -100,7 +100,7 @@
       "version": "'main'"
     },
     "obsidian.nvim": {
-      "rev": "ed6f386abe83e4dafa9afecf50cd9d9fff072a07",
+      "rev": "917780ec88601656c0ea376bea112da137acffc5",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
     "plenary.nvim": {
