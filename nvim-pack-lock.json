@@ -100,7 +100,7 @@
       "version": "'main'"
     },
     "obsidian.nvim": {
-      "rev": "894ffaddb4813314d5fa6f2d9d9e145630c36d10",
+      "rev": "c9c2bcb3bc03b3b3e264e58d43289d8f8c2ee798",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
     "plenary.nvim": {
