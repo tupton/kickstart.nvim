@@ -34,7 +34,7 @@
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "fzf-lua": {
-      "rev": "ca139b8fec043057038c69ce2b34cf4b8b83746e",
+      "rev": "3ff77862f6c62f7b850668435ae43aa026de8758",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "git-blame.nvim": {
@@ -66,11 +66,11 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "8e921c2b68571e978db5d4d3fef9c9a7f8755473",
+      "rev": "cbf8d285e1462dd24acf3507817be2bbcb035919",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "18797ed18f347d0d0da27fec28a67979b1207f70",
+      "rev": "264b5c8fc6e82212af0dc5c345145cfa916efeb6",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nord.nvim": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "f9349d4d99e7d66403ae8bf4fbd357b154dca7a7",
+      "rev": "246572944c2a1e2a646c2e7609ff619b0fe74c18",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tmux-navigation": {
@@ -108,7 +108,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "rainbow-delimiters.nvim": {
-      "rev": "2060b02630f2e4b3a89fc109fedbcdc699641875",
+      "rev": "a798325b7f36acc62741d1029930a7b96d4dd4bf",
       "src": "https://github.com/hiphish/rainbow-delimiters.nvim"
     },
     "sidekick.nvim": {
