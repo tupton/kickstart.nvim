@@ -1439,8 +1439,6 @@ do
       },
     },
     completion = {
-      nvim_cmp = false,
-      blink = true,
       min_chars = 1,
     },
     legacy_commands = false,
