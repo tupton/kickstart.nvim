@@ -1228,6 +1228,7 @@ do
 
   -- Fun icons for filetypes, actions, signs, etc.
   require('mini.icons').setup()
+  MiniIcons.mock_nvim_web_devicons()
 
   -- Indent guides
   local indentscope = require 'mini.indentscope'
