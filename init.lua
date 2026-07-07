@@ -585,9 +585,6 @@ do
     },
   }
 
-  -- Use the fzf-lua UI for vim.ui.select
-  fzf.register_ui_select()
-
   vim.keymap.set('n', '<leader><leader>', fzf.files, { desc = '[ ] Pick files' })
   vim.keymap.set('n', "<leader>'", fzf.buffers, { desc = "['] Pick buffers" })
   vim.keymap.set('n', '<leader><', fzf.git_files, { desc = '[<] Pick git files' })
