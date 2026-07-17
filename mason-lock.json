@@ -2,16 +2,16 @@
   "bash-language-server": "5.6.0",
   "biome": "2.5.3",
   "buf": "v1.71.0",
-  "codespell": "2.4.2",
+  "codespell": "2.4.3",
   "css-lsp": "4.10.0",
   "css-variables-language-server": "2.8.4",
   "eslint-lsp": "4.10.0",
   "eslint_d": "15.0.2",
-  "gh-actions-language-server": "0.3.58",
+  "gh-actions-language-server": "0.3.59",
   "harper-ls": "v2.6.0",
   "lua-language-server": "3.18.2",
   "prettierd": "0.28.0",
-  "ruff": "0.15.21",
+  "ruff": "0.15.22",
   "rust-analyzer": "2026-07-13",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.13.1",
@@ -21,5 +21,5 @@
   "stylua": "v2.5.2",
   "tailwindcss-language-server": "0.14.29",
   "taplo": "0.10.0",
-  "ty": "0.0.59"
+  "ty": "0.0.60"
 }
