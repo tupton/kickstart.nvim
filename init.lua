@@ -681,7 +681,32 @@ do
 
       -- Execute a code action, usually your cursor needs to be on top of an error
       -- or a suggestion from your LSP for this to activate.
-      map('gra', lsp_fzf.lsp_code_actions, 'Code [A]ction', { 'n', 'x' })
+      --
+      -- Some servers (e.g. biome) only return a diagnostic's quickfixes when the
+      -- requested range overlaps the diagnostic, and the empty cursor-position
+      -- range sent in normal mode does not overlap when the cursor sits on the
+      -- diagnostic's first character. Expand the request range to cover the
+      -- diagnostics under the cursor. Uses the fzf-lua vim.ui.select UI.
+      map('gra', function()
+        local mode = vim.api.nvim_get_mode().mode
+        if mode == 'v' or mode == 'V' then return vim.lsp.buf.code_action() end
+        local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local range
+        for _, d in ipairs(vim.diagnostic.get(event.buf, { lnum = lnum - 1 })) do
+          if col >= d.col and col < math.max(d.end_col, d.col + 1) then
+            -- mark-like positions: 1-indexed row, 0-indexed col, end-inclusive
+            local end_col = vim.o.selection ~= 'exclusive' and d.end_col - 1 or d.end_col
+            local stop = { d.end_lnum + 1, math.max(end_col, d.col) }
+            if not range then
+              range = { start = { d.lnum + 1, d.col }, ['end'] = stop }
+            else
+              if d.lnum + 1 < range.start[1] or (d.lnum + 1 == range.start[1] and d.col < range.start[2]) then range.start = { d.lnum + 1, d.col } end
+              if stop[1] > range['end'][1] or (stop[1] == range['end'][1] and stop[2] > range['end'][2]) then range['end'] = stop end
+            end
+          end
+        end
+        vim.lsp.buf.code_action { range = range }
+      end, 'Code [A]ction', { 'n', 'x' })
 
       -- Find references for the word under your cursor.
       map('grr', lsp_fzf.lsp_references, '[G]oto [R]eferences')
