@@ -1428,19 +1428,22 @@ do
 
   -- Edit and manage Obsidian notes and links
   -- plenary.nvim, blink.cmp, fzf-lua, and nvim-treesitter are all already added above
-  vim.pack.add { gh 'obsidian-nvim/obsidian.nvim' }
-  require('obsidian').setup {
-    workspaces = {
-      {
-        name = 'work',
-        path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault',
+  local obsidian_vault = vim.fn.expand '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault'
+  if vim.uv.fs_stat(obsidian_vault) then
+    vim.pack.add { gh 'obsidian-nvim/obsidian.nvim' }
+    require('obsidian').setup {
+      workspaces = {
+        {
+          name = 'work',
+          path = obsidian_vault,
+        },
       },
-    },
-    completion = {
-      min_chars = 1,
-    },
-    legacy_commands = false,
-  }
+      completion = {
+        min_chars = 1,
+      },
+      legacy_commands = false,
+    }
+  end
 
   -- Enforce better vim motions and text objects
   vim.pack.add {
