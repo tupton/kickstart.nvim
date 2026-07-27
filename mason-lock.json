@@ -11,7 +11,7 @@
   "harper-ls": "v2.6.0",
   "lua-language-server": "3.18.2",
   "prettierd": "0.28.0",
-  "ruff": "0.15.22",
+  "ruff": "0.16.0",
   "rust-analyzer": "2026-07-20",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.13.1",
