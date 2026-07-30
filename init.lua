@@ -845,8 +845,6 @@ do
   vim.list_extend(ensure_installed, {
     'stylua', -- Used to format Lua code
     'biome', -- Used to format js/ts
-    'eslint', -- Used to format js/ts
-    'eslint_d', -- Used to format js/ts
     'prettierd', -- Used to format js/ts
     'stylelint', -- Used to format css
   })
@@ -967,19 +965,6 @@ do
       ['biome-check'] = {
         require_cwd = true,
       },
-      eslint_d = {
-        -- for some reason, the default cwd for eslint_d only looks for package.json
-        cwd = require('conform.util').root_file {
-          '.eslintrc.js',
-          '.eslintrc.json',
-          '.eslintrc.yaml',
-          'eslint.config.js',
-          'eslint.config.mjs',
-          'eslint.config.cjs',
-          'eslint.config.ts',
-        },
-        require_cwd = true,
-      },
       prettierd = {
         require_cwd = true,
       },
@@ -989,10 +974,10 @@ do
       -- Conform can also run multiple formatters sequentially
       -- You can use 'stop_after_first' to run the first available formatter from the list
       python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
-      javascript = { 'biome-check', 'eslint_d', 'prettierd' },
-      javascriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
-      typescript = { 'biome-check', 'eslint_d', 'prettierd' },
-      typescriptreact = { 'biome-check', 'eslint_d', 'prettierd' },
+      javascript = { 'biome-check' },
+      javascriptreact = { 'biome-check' },
+      typescript = { 'biome-check' },
+      typescriptreact = { 'biome-check' },
       markdown = { 'prettierd', 'injected' },
       css = { 'stylelint' },
       proto = { 'buf' },
