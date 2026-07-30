@@ -6,11 +6,11 @@
   "css-lsp": "4.10.0",
   "css-variables-language-server": "2.8.4",
   "gh-actions-language-server": "0.3.60",
-  "harper-ls": "v2.6.0",
+  "harper-ls": "v2.7.0",
   "lua-language-server": "3.18.2",
-  "prettierd": "0.28.0",
+  "prettierd": "0.29.0",
   "ruff": "0.16.0",
-  "rust-analyzer": "2026-07-20",
+  "rust-analyzer": "2026-07-27",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.13.1",
   "sqlls": "1.7.1",
@@ -19,5 +19,5 @@
   "stylua": "v2.5.2",
   "tailwindcss-language-server": "0.16.0",
   "taplo": "0.10.0",
-  "ty": "0.0.63"
+  "ty": "0.0.64"
 }
