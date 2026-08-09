@@ -87,8 +87,6 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- ============================================================
 -- SECTION 1: FOUNDATION
 -- Core Neovim settings, leaders, options, basic keymaps, basic autocmds
--- SECTION 1: OPTIONS
--- Core Neovim settings, leaders, options, basic keymaps, basic autocmds
 -- ============================================================
 do
   -- Enable faster startup by caching compiled Lua modules
@@ -290,7 +288,6 @@ do
 
   -- Set text width
   vim.o.textwidth = 100
-
 
   -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
   -- instead raise a dialog asking if you wish to save the current file(s)
