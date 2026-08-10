@@ -86,7 +86,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 
 -- ============================================================
 -- SECTION 1: FOUNDATION
--- Core Neovim settings, leaders, options, basic keymaps, basic autocmds
+-- Core Neovim settings, leaders, options
 -- ============================================================
 do
   -- Enable faster startup by caching compiled Lua modules
@@ -288,11 +288,6 @@ do
 
   -- Set text width
   vim.o.textwidth = 100
-
-  -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
-  -- instead raise a dialog asking if you wish to save the current file(s)
-  -- See `:help 'confirm'`
-  vim.o.confirm = true
 end
 
 -- ============================================================
@@ -408,7 +403,7 @@ do
 end
 
 -- ============================================================
--- SECTION 2: PLUGIN MANAGER INTRO
+-- SECTION 3: PLUGIN MANAGER INTRO
 -- vim.pack intro, build hooks
 -- ============================================================
 do
@@ -478,21 +473,24 @@ end
 ---@return string
 local function gh(repo) return 'https://github.com/' .. repo end
 
--- [[ Installing and Configuring Plugins ]]
---
--- NOTE: Here is where you install your plugins.
---
--- To install a plugin simply call `vim.pack.add` with its git url.
--- This will download the default branch of the plugin, which will usually be `main` or `master`
--- You can also have more advanced specs, which we will talk about later.
---
--- For most plugins its not enough to install them, you also need to call their `.setup()` to start them.
---
---  To check plugin status or fetch updates:
---    :lua vim.pack.update(nil, { offline = true }) -- inspect state
---    :lua vim.pack.update()                        -- fetch updates
---
+-- ============================================================
+-- SECTION 4: PLUGINS
+-- ============================================================
 do
+  -- [[ Installing and Configuring Plugins ]]
+  --
+  -- NOTE: Here is where you install your plugins.
+  --
+  -- To install a plugin simply call `vim.pack.add` with its git url.
+  -- This will download the default branch of the plugin, which will usually be `main` or `master`
+  -- You can also have more advanced specs, which we will talk about later.
+  --
+  -- For most plugins its not enough to install them, you also need to call their `.setup()` to start them.
+  --
+  --  To check plugin status or fetch updates:
+  --    :lua vim.pack.update(nil, { offline = true }) -- inspect state
+  --    :lua vim.pack.update()                        -- fetch updates
+  --
   -- Colorscheme (added first so it loads before everything else)
   vim.pack.add { gh 'shaunsingh/nord.nvim' }
   vim.o.termguicolors = true
@@ -840,11 +838,6 @@ do
   require('mason').setup {}
   require('mason-lock').setup {}
 
-  -- Translates between nvim-lspconfig server names and mason.nvim package names (e.g. lua_ls <-> lua-language-server)
-  require('mason-lspconfig').setup {
-    automatic_enable = false, -- Change this to true if you want to automatically enable servers that are installed manually (e.g. via :Mason / :MasonInstall)
-  }
-
   -- Ensure the servers and tools above are installed
   --
   -- To check the current status of installed tools and/or manually install
@@ -864,9 +857,10 @@ do
   })
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+  -- Translates between nvim-lspconfig server names and mason.nvim package names (e.g. lua_ls <-> lua-language-server)
   require('mason-lspconfig').setup {
     ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-    automatic_enable = true, -- automatically enable servers installed via Mason
+    automatic_enable = true, -- Change this to true if you want to automatically enable servers that are installed manually (e.g. via :Mason / :MasonInstall)
   }
 
   -- Enable extra server not managed by Mason, if any
