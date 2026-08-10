@@ -85,7 +85,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
 -- ============================================================
--- SECTION 1: FOUNDATION
+-- SECTION 1: OPTIONS
 -- Core Neovim settings, leaders, options
 -- ============================================================
 do
@@ -478,8 +478,6 @@ local function gh(repo) return 'https://github.com/' .. repo end
 -- ============================================================
 do
   -- [[ Installing and Configuring Plugins ]]
-  --
-  -- NOTE: Here is where you install your plugins.
   --
   -- To install a plugin simply call `vim.pack.add` with its git url.
   -- This will download the default branch of the plugin, which will usually be `main` or `master`
@@ -1361,21 +1359,21 @@ do
   ---@param buf integer
   ---@param language string
   local function treesitter_try_attach(buf, language)
-    -- check if parser exists and load it
+    -- Check if a parser exists and load it
     if not vim.treesitter.language.add(language) then return end
-    -- enables syntax highlighting and other treesitter features
+    -- Enable syntax highlighting and other treesitter features
     vim.treesitter.start(buf, language)
 
-    -- enables treesitter based folds
-    -- for more info on folds see `:help folds`
+    -- Enable treesitter based folds
+    -- For more info on folds see `:help folds`
     -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     -- vim.wo.foldmethod = 'expr'
 
-    -- check if treesitter indentation is available for this language, and if so enable it
-    -- in case there is no indent query, the indentexpr will fallback to the vim's built in one
+    -- Check if treesitter indentation is available for this language, and if so enable it
+    -- In case there is no indent query, the indentexpr will fallback to the vim's built in one
     local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
 
-    -- enables treesitter based indentation
+    -- Enables treesitter based indentation
     if has_indent_query then vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
   end
 
@@ -1390,14 +1388,14 @@ do
       local installed_parsers = ts.get_installed 'parsers'
 
       if vim.tbl_contains(installed_parsers, language) then
-        -- enable the parser if it is installed
+        -- Enable the parser if it is already installed
         treesitter_try_attach(buf, language)
       elseif vim.tbl_contains(available_parsers, language) then
-        -- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
+        -- If a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
         vim.notify('Installing treesitter parser for ' .. language .. '...', vim.log.levels.INFO)
         ts.install(language):await(function() treesitter_try_attach(buf, language) end)
       else
-        -- try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
+        -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
         treesitter_try_attach(buf, language)
       end
     end,
