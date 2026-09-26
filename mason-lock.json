@@ -1,5 +1,5 @@
 {
-  "bash-language-server": "5.8.0",
+  "bash-language-server": "5.8.1",
   "biome": "2.5.14",
   "buf": "v1.73.0",
   "codespell": "2.4.3",
@@ -10,7 +10,7 @@
   "lua-language-server": "3.19.1",
   "prettierd": "0.29.0",
   "ruff": "0.16.8",
-  "rust-analyzer": "2026-09-14",
+  "rust-analyzer": "2026-09-21",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.14.1",
   "sqlls": "1.7.1",
@@ -19,5 +19,5 @@
   "stylua": "v2.5.2",
   "tailwindcss-language-server": "0.16.0",
   "taplo": "0.10.0",
-  "ty": "0.0.82"
+  "ty": "0.0.83"
 }
