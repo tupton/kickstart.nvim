@@ -9,7 +9,7 @@
   "harper-ls": "v2.11.0",
   "lua-language-server": "3.19.1",
   "prettierd": "0.29.0",
-  "ruff": "0.16.8",
+  "ruff": "0.16.9",
   "rust-analyzer": "2026-09-21",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.14.1",
@@ -19,5 +19,5 @@
   "stylua": "v2.5.2",
   "tailwindcss-language-server": "0.16.0",
   "taplo": "0.10.0",
-  "ty": "0.0.83"
+  "ty": "0.0.84"
 }
