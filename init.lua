@@ -467,8 +467,8 @@ do
   })
 end
 
----Because most plugins are hosted on GitHub, you can use the helper
----function to have less repetition in the following sections.
+--- Because most plugins are hosted on GitHub, you can use the helper
+--- function to have less repetition in the following sections.
 ---@param repo string
 ---@return string
 local function gh(repo) return 'https://github.com/' .. repo end
@@ -736,14 +736,18 @@ do
     -- clangd = {},
     -- gopls = {},
     -- pyright = {},
+    -- tsc = {},
+    --
+    -- Some languages (like rust) have entire language plugins that can be useful:
+    --    https://github.com/mrcjkb/rustaceanvim
+    --
+    -- But for many setups, the LSP (`rust_analyzer`) will work just fine
     -- rust_analyzer = {},
     --
-    -- Some languages (like typescript) have entire language plugins that can be useful:
-    --    https://github.com/pmizio/typescript-tools.nvim
-    --
-    -- But for many setups, the LSP (`ts_ls`) will work just fine
-    -- ts_ls = {},
-    --
+
+    stylua = {}, -- Used to format Lua code
+
+    -- Special Lua Config, as recommended by neovim help docs
     lua_ls = {
       on_init = function(client)
         client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
