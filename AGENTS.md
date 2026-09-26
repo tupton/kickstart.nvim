@@ -4,24 +4,23 @@ This document provides coding standards and operational commands for agentic dev
 
 ## Project Overview
 
-This is a Neovim configuration based on the [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) template. It uses `lazy.nvim` for plugin management and `mason.nvim` to manage external tools like language servers and formatters.
+This is a Neovim configuration based on the [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) template. It uses Neovim's built-in `vim.pack` for plugin management and `mason.nvim` to manage external tools like language servers and formatters.
 
 ## Build/Lint/Test Commands
 
 ### Lua Formatting
 - **Check formatting**: `stylua --check .`
 - **Format code**: `stylua .`
-- CI validates formatting on PRs via `.github/workflows/stylua.yml`
+- `.github/workflows/stylua.yml` is inherited from upstream and only runs on `nvim-lua/kickstart.nvim`, so run `stylua --check .` yourself
 
 ### Health Checks
 - Run health check in Neovim: `:checkhealth`
 - Run kickstart-specific health: `:checkhealth kickstart`
-- Health checks verify: Neovim version (>= 0.10), git, make, unzip, ripgrep
+- Health checks verify: Neovim version (>= 0.12), git, make, unzip, ripgrep
 
 ### Plugin Management
-- Sync plugins: `:Lazy sync`
-- Check plugin status: `:Lazy`
-- Clean unused plugins: `:Lazy clean`
+- Update plugins: `:PackUpdate` (all) or `:PackUpdate <name>` (defined in `init.lua`, wraps `vim.pack.update()`)
+- Plugin revisions are pinned in `nvim-pack-lock.json`; Mason tool versions in `mason-lock.json`
 
 ### Testing
 - No unit tests exist (configuration only)
@@ -39,13 +38,12 @@ This is a Neovim configuration based on the [kickstart.nvim](https://github.com/
 
 ### Imports and Requires
 - Use `require 'module'` for Lua modules
-- Plugin requires in config functions: `local lint = require 'lint'`
-- Import at point of use within config blocks, not file top
+- Require a plugin right after its `vim.pack.add` call, not at file top: `local lint = require 'lint'`
 
 ### Naming Conventions
 - Variables/functions: `snake_case` (e.g., `lint_augroup`, `check_version`)
 - Global Neovim settings: `camelCase` via `vim.g` (e.g., `vim.g.have_nerd_font`)
-- File/module names: `snake_case` (e.g., `neo-tree.lua`, `debug.lua`)
+- File/module names: match the plugin or feature name (e.g., `neo-tree.lua`, `indent_line.lua`)
 - Augroup names: lowercase strings (e.g., `'lint'`, `'user_events'`)
 
 ### Neovim API Usage
@@ -55,28 +53,18 @@ This is a Neovim configuration based on the [kickstart.nvim](https://github.com/
 - Autocommands: `vim.api.nvim_create_autocmd(events, { group, callback, ... })`
 - Augroups: `vim.api.nvim_create_augroup(name, { clear = true })`
 
-### Plugin Configuration (lazy.nvim)
-Plugin specs use table format with common fields:
+### Plugin Configuration (vim.pack)
+Each plugin is added, set up, and given its keymaps in one block of `init.lua`. `gh` is a local helper in `init.lua`; files under `lua/` pass the full URL instead:
 ```lua
-{
-  'author/plugin-name',
-  version = '*',          -- optional: pin version
-  dependencies = { ... }, -- optional: plugin deps
-  event = { ... },        -- optional: lazy loading
-  keys = { ... },         -- optional: keybindings
-  opts = { ... },         -- optional: auto-configuration
-  config = function()     -- optional: custom config
-    -- setup code
-  end,
-}
+vim.pack.add { gh 'f-person/git-blame.nvim' }
+require('gitblame').setup { enabled = false }
+vim.keymap.set('n', '<leader>gb', function() vim.cmd.GitBlameToggle() end, { desc = '[G]it [B]lame' })
 ```
 
 ### Keybindings
-- Define in `keys` field for plugins or via `vim.keymap.set` in init.lua
+- Define with `vim.keymap.set` next to the plugin's setup call
 - Include `desc` field for all keymaps (required by which-key)
-- Format: `{ '<leader>gb', function() ... end, desc = '[G]it [B]lame' }`
 - Use descriptive bracket notation: `[C]ode`, `[D]iff`, `[G]it`
-- Mode prefixes: `n` (normal), `i` (insert), `x` (visual), `v` (visual+select)
 
 ### Autocommands
 - Always create augroups with `{ clear = true }` to avoid duplicates
@@ -92,18 +80,15 @@ Plugin specs use table format with common fields:
 
 ### File Organization
 - `init.lua`: Main configuration file (single entry point)
-- `lua/kickstart/plugins/*.lua`: Modular plugin configurations
-- `lua/custom/plugins/*.lua`: Custom plugin additions (merge-safe)
+- `lua/kickstart/plugins/*.lua`: Optional plugin configurations; `init.lua` does not load them, so add `require 'kickstart.plugins.<name>'` to use one
+- `lua/custom/plugins/*.lua`: Custom plugin additions (merge-safe); `init.lua` does not load them, so add `require 'custom.plugins'` to use them
 - `lua/kickstart/health.lua`: Health check definitions
 
 ### Error Handling
 - Use `pcall` for plugin requires when optional: `local ok, plugin = pcall(require, 'plugin')`
 - Check plugin availability before use in keymaps/autocommands
-- Lazy loading reduces startup errors from missing tools
 
 ### General Principles
 - Keep `init.lua` readable with clear section headers
-- Use lazy loading for non-essential plugins
 - Document user-configurable settings with comments
-- Prefer plugin's `opts` field over `config` when possible
 - Keep keymaps discoverable via which-key descriptions
